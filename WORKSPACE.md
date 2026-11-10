@@ -1,18 +1,18 @@
 # Exercise workspace
 
-Infrastructure prepared on 2026-11-09. The remaining Unit 7 batch is ready in [SESSION.md](SESSION.md): ten activities, with coding instructions in [JobApplication.cs](src/ExerciseWorkspace/JobApplication.cs) and [ApplicationTextFile.cs](src/ExerciseWorkspace/ApplicationTextFile.cs).
+Infrastructure prepared on 2026-11-09. Unit 8 is selected; planning has not started. The active handoff is in [SESSION.md](SESSION.md); [Unit 7's session record](sessions/Unit7-2026-11-10.md) is preserved separately.
 The integrated Unit 7 exit task, [ApplicationBatchImporter.cs](src/ExerciseWorkspace/ApplicationBatchImporter.cs), is complete with guidance; its 13 tests pass as of 2026-11-10. Initial Unit 7 practice is complete with targeted reviews retained in PROGRESS.md. Earlier learner implementations are preserved.
 The [stream ownership task](RESOURCE-EXERCISE.md) is set aside after the learner requested source-material-focused practice; its reader-disposal issue remains recorded.
 The completed [salary range task](EXERCISE.md) and learner implementation are preserved.
-Existing course materials, AGENTS.md and README.md have been preserved.
+Existing course material and learner code are preserved; AGENTS.md includes the updated teaching and unit-transition workflow.
 
 ## Unit 7 checkpoint readiness — 2026-11-10
 
 The full solution test run passes all 49 tests. TextPreview's unassessed reader-disposal
 issue remains documented despite its passing stream-lifetime tests.
-The local checkpoint commit is pending: include relevant learner source and tests
-(currently untracked), AGENTS.md, PROGRESS.md, SESSION.md and workspace/exercise docs.
-The solution/configuration files are already tracked; include them if changed.
+Unit 7 learner source, tests, progress, session notes and workflow were committed as
+`9154aae` and pushed to `origin/main`. Unit 8 uses the same solution and projects;
+its exercise scaffolding will be prepared when planning is requested.
 Generated bin/obj/TestResults files are ignored. No reorganisation is needed to build
 or begin Unit 8. Follow AGENTS.md's transition workflow when moving on.
 

@@ -2,11 +2,12 @@
 
 ## Overview
 
-- Current unit: Unit 7 — Defensive C# & Resource Management.
-- Current topic: ApplicationBatchImporter completed with targeted guidance; initial Unit 7 practice complete, with review items retained.
+- Current unit: Unit 8 — Generics & Abstractions (selected; planning pending).
+- Current topic: Unit transition ready; no Unit 8 activity assigned or assessed yet.
 - Record initialized: 2026-11-09.
 - Last study session: 2026-11-10 — integrated batch importer corrected and reviewed; all 13 targeted tests pass.
-- Next recommended activity: Brief transfer review of validation-before-side-effects, read/callback exception boundaries and synchronous versus asynchronous disposal. Then prepare Unit 8 without requiring exhaustive Unit 7 mastery.
+- Next recommended activity: On request, prepare the Unit 8 activity batch from the source material, carrying forward brief Unit 7 review. Initial Unit 7 practice is complete with review items retained.
+- Git checkpoint: Unit 7 code, tests, progress and workflow committed as 9154aae and pushed to origin/main on 2026-11-10. Detailed session archived in sessions/Unit7-2026-11-10.md.
 - Session preference: Ask theory questions one at a time so the learner can focus.
 - Difficulty feedback: Learner finds coding exercises too easy. Prefer realistic integrated implementation, debugging and design decisions. Specify observable requirements clearly without prescribing every language construct; give API/syntax reminders directly when needed. Avoid extending practice with trivial tasks already demonstrated.
 - Exercise format preference: Concise requirements, essential reminders and the test command belong in the C# file's comments; SESSION.md indexes activities rather than duplicating coding specifications.
@@ -397,10 +398,10 @@ No persistent conceptual weakness established. Some standard exception names nee
 
 ## Next Session
 
-- Preparation completed on 2026-11-09 at the learner's request: SESSION.md contains ten ready activities spanning all remaining Unit 7 topic groups, targeted retrieval and integrated review.
-- New starters: JobApplication.cs (transitions and ApplicationInbox null guard) and ApplicationTextFile.cs (the unit's LoadText exercise). Concise instructions and filtered commands are in source comments.
-- Verification: Both projects build; 23 existing tests pass. Thirteen new cases are discovered: one supplied initial-state check passes and twelve fail on unimplemented starters, with no unexpected failure causes. Preparation supplies no new learner evidence or mastery scores.
-- F10 is complete with guidance. Briefly revisit the retained Unit 7 review items, then prepare Unit 8. Skip redundant easy checks and preserve all learner code; TextPreview remains set aside.
+- Unit 8 is selected; wait for the learner's planning request before creating its activity queue or coding scaffolding. SESSION.md holds the planning handoff, not a prepared lesson.
+- Preserve the Unit 7 checkpoint and learner implementations. Review items remain scheduled; no Unit 8 mastery scores have been assigned.
+- Latest verification: Full solution test run passes all 49 tests. No new source/test changes were needed for the unit transition.
+- Retain brief Unit 7 review without restarting completed work. TextPreview remains set aside; its passing tests do not establish correct reader disposal.
 - Read this record and the relevant source sections before preparing activities.
 - Ask one theory question at a time; treat the learner as an experienced engineer returning to practice.
 - Select one meaningful coding task from actual evidence; provide scaffolding and requirement tests without implementing the solution.
