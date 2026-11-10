@@ -1004,3 +1004,131 @@ Do not optimise for the number of questions answered, files created or exercises
 The ultimate objective is not completing all possible C# exercises.
 
 It is returning to modern .NET development with confidence and demonstrable ability.
+
+## Fast interactive teaching workflow
+
+### Objective
+
+Prioritise a responsive, natural teaching rhythm. Avoid unnecessary tool calls, file operations and infrastructure changes between learner interactions.
+
+### Preparation mode
+
+When asked to prepare a session:
+
+1. Read the relevant unit materials and `PROGRESS.md`.
+2. Prepare a queue of 8–12 varied activities, including retrieval, prediction, debugging, code review and practical implementation.
+3. Create all necessary C# scaffolding and tests for the coding activities in advance.
+4. Verify the exercise infrastructure with a single build/test pass where practical.
+5. Save the prepared activities and their metadata in `SESSION.md`.
+6. Do not reveal solutions or answers.
+7. Do not overwrite learner-authored code.
+
+Each activity should contain:
+- ID and associated unit/topics;
+- activity type and difficulty;
+- question or requirements;
+- relevant source file and test references;
+- completion status.
+
+Keep the answer key or instructor guidance separate from learner-visible starter code.
+
+### Coding exercise instructions
+
+Put learner-facing instructions in concise comments in the C# file the learner will
+modify, immediately above the relevant class or method. The learner should be able
+to understand and run the task without opening a separate Markdown file.
+
+Include only:
+- a short objective and associated unit/topics;
+- clear behavioural requirements, including relevant failure cases;
+- essential API or syntax reminders when needed;
+- the command to run the relevant tests.
+
+Avoid long explanations, repeated requirements and solution code in these comments.
+Use chat for teaching and hints. Keep SESSION.md for activity metadata and references
+to the source comments, rather than duplicating coding specifications. Do not create
+a separate exercise requirements Markdown file by default; reserve one for material
+that genuinely cannot be expressed clearly in a short comment block.
+
+When updating an existing task, preserve learner implementation and unrelated comments.
+
+### Teaching mode
+
+During an interactive session:
+
+1. Prefer prepared activities from `SESSION.md`.
+2. Present one activity at a time.
+3. Evaluate conversational answers directly without invoking tools when possible.
+4. Do not reread all course materials or `PROGRESS.md` after every answer.
+5. Do not run builds/tests for theory or prediction questions.
+6. Do not modify project files between questions unless necessary.
+7. For coding exercises, inspect the learner's implementation and run relevant tests when requested or when the implementation is ready.
+8. Give concise feedback and move promptly to the next activity.
+9. Adapt activity selection based on demonstrated understanding.
+
+If the learner answers correctly, avoid redundant explanations.
+
+If the learner struggles, provide a targeted explanation and use an existing alternative question when available.
+
+Generate new activities during the session only when the prepared queue cannot address a demonstrated gap.
+
+### Progress updates
+
+Maintain working session state in the conversation and `SESSION.md`.
+
+Update `PROGRESS.md`:
+- after a substantial coding exercise;
+- at the end of a study session;
+- when a significant mastery change is demonstrated.
+
+Do not rewrite the entire progress file after every short answer.
+
+### Session replenishment
+
+When the prepared queue is nearly exhausted, recommend preparing the next batch.
+
+Prefer preparing new exercises between sessions rather than interrupting an active teaching exchange.
+
+### Infrastructure
+
+Prefer a stable, reusable .NET solution and test project.
+
+Reuse existing exercise runners and test fixtures whenever possible.
+
+Avoid creating new projects or installing packages for routine exercises.
+
+Build only the affected project when appropriate.
+
+Never optimise preparation speed by providing completed learner solutions.
+
+### Moving to the next unit
+
+Treat a unit transition as a short checkpoint and preparation step, not a reset.
+
+1. Update PROGRESS.md with actual exercise results, completion versus mastery,
+   remaining weaknesses and spaced-review items. A completed unit may still need review.
+2. Close the current activities in SESSION.md, explicitly distinguishing completed,
+   unfinished and set-aside work. Preserve a concise unit summary in PROGRESS.md before
+   reusing SESSION.md for the next batch.
+3. Review Git status and run the solution tests once. Record expected starter failures
+   or known unfinished work honestly; do not weaken tests or finish learner code to
+   obtain a green checkpoint.
+4. At the transition, create a local checkpoint commit of the relevant learning work,
+   unless the learner requests otherwise. Include learner source, exercise tests,
+   PROGRESS.md, SESSION.md, updated AGENTS.md and relevant workspace/configuration docs.
+   Inspect the diff and stage explicit relevant paths. Exclude unrelated edits, secrets,
+   generated outputs and temporary files. Do not push unless requested.
+5. Keep the existing solution and projects. A clean workspace means easy navigation,
+   not deletion of completed work. Prefer lightweight unit folders inside the current
+   source/test projects when useful; keep corresponding tests with their source unit.
+   Do not move or restructure files merely to satisfy a cosmetic preference.
+6. Never overwrite/delete learner code without explicit permission, even after a Git
+   checkpoint. Preserve unfinished work with its real status. A commit is a recovery
+   point, not permission to discard implementations.
+7. Read the next unit and prepare its activity batch, source comments and tests before
+   teaching resumes. Carry forward a few high-value review items from the previous unit.
+   Update WORKSPACE.md when active paths or run instructions change.
+
+Do this between units rather than interrupting the teaching exchange. Do not create a
+new project per unit or clean bin/obj simply for housekeeping; generated output should
+remain ignored by Git. Confirm the checkpoint and next starting activity concisely.

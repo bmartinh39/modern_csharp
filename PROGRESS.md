@@ -2,11 +2,16 @@
 
 ## Overview
 
-- Current unit: No active unit; Units 1–9 previously studied.
-- Current topic: Environment preparation and baseline inventory only.
+- Current unit: Unit 7 — Defensive C# & Resource Management.
+- Current topic: ApplicationBatchImporter completed with targeted guidance; initial Unit 7 practice complete, with review items retained.
 - Record initialized: 2026-11-09.
-- Last study session: Not recorded; no lesson or learner assessment has occurred in this sandbox.
-- Next recommended activity: When requested, a brief mixed diagnostic to select targeted practice, without restarting the curriculum.
+- Last study session: 2026-11-10 — integrated batch importer corrected and reviewed; all 13 targeted tests pass.
+- Next recommended activity: Brief transfer review of validation-before-side-effects, read/callback exception boundaries and synchronous versus asynchronous disposal. Then prepare Unit 8 without requiring exhaustive Unit 7 mastery.
+- Session preference: Ask theory questions one at a time so the learner can focus.
+- Difficulty feedback: Learner finds coding exercises too easy. Prefer realistic integrated implementation, debugging and design decisions. Specify observable requirements clearly without prescribing every language construct; give API/syntax reminders directly when needed. Avoid extending practice with trivial tasks already demonstrated.
+- Exercise format preference: Concise requirements, essential reminders and the test command belong in the C# file's comments; SESSION.md indexes activities rather than duplicating coding specifications.
+- Curriculum preference: Questions and exercises should test the actual source material. Do not make incidental APIs outside the units (such as StreamReader.leaveOpen) the assessed concept; provide any necessary API details directly.
+- Prior practice clarification (2026-11-09): Learner reports Units 7–9 were read only, with no practical exercises completed. Prior coverage remains recorded; mastery remains unassessed. Practice history for Units 1–6 is not established here.
 
 ## Recording conventions
 
@@ -36,7 +41,7 @@
 | 4 — Collections, Equality & Protecting State | Introduced; previously covered | 15/15 (100%) | — | 0/15 | — |
 | 5 — LINQ, Lambdas, Delegates & IEnumerable | Introduced; previously covered | 21/21 (100%) | — | 0/21 | — |
 | 6 — Modern Modelling, Equality & Pattern Matching | Introduced; previously covered | 18/18 (100%) | — | 0/18 | — |
-| 7 — Defensive C# & Resource Management | Introduced; previously covered | 16/16 (100%) | — | 0/16 | — |
+| 7 — Defensive C# & Resource Management | Needs review; initial practice complete | 16/16 (100%) | 2.44/4 | 16/16 | 2026-11-10 |
 | 8 — Generics & Abstractions | Introduced; previously covered | 16/16 (100%) | — | 0/16 | — |
 | 9 — Async C# | Introduced; previously covered | 27/27 (100%) | — | 0/27 | — |
 
@@ -193,22 +198,22 @@ Source: [7 Defensive C# & Resource Management 408ea85eec91805b9b74ec5544ce90a1](
 
 | Previously covered | Topic | Status | Mastery /4 | Last assessed | Next review | Evidence |
 |--------------------|-------|--------|------------|---------------|-------------|----------|
-| [x] | Validation versus exception handling and boundary decisions | Introduced | — | — | — | P |
-| [x] | Guard clauses and preserving invariants | Introduced | — | — | — | P |
-| [x] | ArgumentException, ArgumentNullException, ArgumentOutOfRangeException | Introduced | — | — | — | P |
-| [x] | InvalidOperationException for invalid object state | Introduced | — | — | — | P |
-| [x] | `try` / `catch`, propagation and specific catch ordering | Introduced | — | — | — | P |
-| [x] | Catch only when meaningful handling is possible | Introduced | — | — | — | P |
-| [x] | `throw;` versus `throw ex;` and preserving stack traces | Introduced | — | — | — | P |
-| [x] | `finally` and cleanup control flow | Introduced | — | — | — | P |
-| [x] | Exception filters with `when` | Introduced | — | — | — | P |
-| [x] | Expected absence/validation outcomes versus exceptional failure | Introduced | — | — | — | P |
-| [x] | Custom exceptions when they add domain meaning | Introduced | — | — | — | P |
-| [x] | Null guards, ThrowIfNull, `nameof` and explicit guard helpers | Introduced | — | — | — | P |
-| [x] | Resource ownership and lifetime | Introduced | — | — | — | P |
-| [x] | `IDisposable`, `using` statements and using declarations | Introduced | — | — | — | P |
-| [x] | Disposal versus garbage collection | Introduced | — | — | — | P |
-| [x] | `IAsyncDisposable` and `await using` | Introduced | — | — | — | P |
+| [x] | Validation versus exception handling and boundary decisions | Practising | 2 | 2026-11-09 | Next study session | Identified that returning null from a broad catch conflates not-found with lookup/storage failure and hides information from the caller. |
+| [x] | Guard clauses and preserving invariants | Practising | 3 | 2026-11-09 | Next study session | Independently placed all validation before assignments in constructor and Update, preserving state on rejection. Corrected exception precedence after feedback; shared helper extracted with guidance. |
+| [x] | ArgumentException, ArgumentNullException, ArgumentOutOfRangeException | Practising | 2 | 2026-11-09 | Next study session | Negative-bound/order checks implemented with precedence feedback in SalaryRange; now independently uses ThrowIfNull in ApplicationInbox, including correct parameter name. Retain 2 pending independent mixed exception-selection review. |
+| [x] | InvalidOperationException for invalid object state | Practising | 3 | 2026-11-09 | Next study session | Independently implemented Apply/Reject preconditions with InvalidOperationException and no state changes on invalid transitions; all workflow tests pass. |
+| [x] | `try` / `catch`, propagation and specific catch ordering | Practising | 3 | 2026-11-09 | Next study session | Implemented ImportAttempt: handles selected IOException cases and lets original unhandled exceptions propagate; tests verify exception identity. Specific catch ordering remains unassessed. |
+| [x] | Catch only when meaningful handling is possible | Practising | 2 | 2026-11-09 | Next study session | Explained handling at a layer with a meaningful response, otherwise propagation; cleanup versus handling distinction clarified. |
+| [x] | `throw;` versus `throw ex;` and preserving stack traces | Practising | 2 | 2026-11-09 | Next study session | Correctly recalled that bare throw preserves the stack trace; rethrow-location detail clarified. No debugging task yet. |
+| [x] | `finally` and cleanup control flow | Practising | 3 | 2026-11-09 | Next study session | Implemented onFinished in finally; four tests verify exactly-once execution after success, handled failure and propagated failures, including return paths. |
+| [x] | Exception filters with `when` | Practising | 3 | 2026-11-09 | Next study session | Implemented type-plus-flag filter correctly after a syntax reminder using a different exception type; all four ImportAttempt cases pass. No solution supplied. |
+| [x] | Expected absence/validation outcomes versus exceptional failure | Practising | 2 | 2026-11-09 | Next study session | Identified business-contract dependence; after a concrete scenario, correctly treated missing arbitrary ID as an expected outcome. |
+| [x] | Custom exceptions when they add domain meaning | Practising | 2 | 2026-11-09 | Next study session | Correctly explained that a custom type adds little if callers handle all transition failures identically; it needs useful meaning/handling differentiation. Custom exception implementation not assessed. |
+| [x] | Null guards, ThrowIfNull, `nameof` and explicit guard helpers | Practising | 3 | 2026-11-09 | Next study session | Explained compile-time annotations versus runtime input and implemented ThrowIfNull before adding to ApplicationInbox. Null input preserves existing count and names application in the exception. |
+| [x] | Resource ownership and lifetime | Practising | 3 | 2026-11-09 | Next study session | Correctly implemented owned StreamReader lifetime in LoadText; prior borrowing/ownership-transfer predictions correct. Four file tests pass; code review confirms cleanup on read failure. |
+| [x] | `IDisposable`, `using` statements and using declarations | Practising | 3 | 2026-11-09 | Next study session | Implemented using declaration around owned reader and returned ReadToEnd without swallowing exceptions. Tests verify content/file release and missing-file propagation; reviewed exceptional-exit cleanup. |
+| [x] | Disposal versus garbage collection | Practising | 2 | 2026-11-09 | Next study session | Correctly stated disposal does not immediately reclaim managed memory; GC/unreachability distinction clarified. |
+| [x] | `IAsyncDisposable` and `await using` | Needs review | 1 | 2026-11-09 | Next study session | Recognises await using; questioned synchronous disposal being immediate and what async cleanup waits for. Explained that both await cleanup completion, while genuine async I/O can avoid blocking. No independent transfer check after clarification; revisit with Unit 9. |
 
 ## Unit 8 — Generics & Abstractions
 
@@ -273,27 +278,130 @@ Source: [9 Async C# 40dea85eec9180be9557cd6855bc21cd](material/9%20Async%20C%23%
 
 ## Spaced Repetition Queue
 
-No performance-based reviews are scheduled yet. Prior coverage alone does not establish a weakness or a review priority.
+Initial conceptual retrieval and focused validation implementation reviewed. Resource-management implementation remains unassessed.
 
 | Topic | Priority | Last assessed | Next review | Evidence / action |
 |-------|----------|---------------|-------------|-------------------|
-| Baseline selection across Units 1–9 | Unassigned | — | Next requested study session | Use 3–5 short retrieval prompts and later independent coding to choose focused practice. No questions started during setup. |
+| Unit 7 exception selection | Medium | 2026-11-09 | Next study session | Distinguish bad arguments from invalid state using fresh scenarios; exact API names needed reminders. |
+| Unit 7 async disposal: cleanup completion versus thread blocking | High | 2026-11-09 | Next study session | Distinguish synchronous from immediate; await does not guarantee thread release. Recognised syntax but conceptual understanding after explanation is not yet verified. |
+| Unit 7 propagation, filters and finally | Low | 2026-11-09 | Next study session | Correct focused implementation; revisit with a different failure-handling scenario, then approximately +3/+7/+21 days as appropriate. |
+| Unit 7 guard clauses and invariant preservation | Low | 2026-11-09 | Next study session | Use a different state-changing operation; learner placed validation before mutation independently. |
+| Unit 7 rethrowing and disposal semantics | Low | 2026-11-09 | Next study session | Correct conceptual retrieval; verify transfer through later debugging/resource tasks. |
 
 After observed learning, schedule first review for the next study session, then approximately +3, +7 and +21 days. Adapt to results. Priorities: high for misconceptions or inability to apply; medium for supported performance; low for correct independent application. Use fresh examples and occasional cross-unit combinations.
 
 ## Persistent Weaknesses
 
-None established in this sandbox. Do not infer weaknesses from unassessed topics or the learner's time away from hands-on development.
+No persistent conceptual weakness established. Some standard exception names needed reminders; validation precedence needed one correction. Focused invariant protection demonstrated; broader practical fluency remains to be assessed.
 
 ## Exercise History
 
-No learner exercises assigned, implemented, reviewed or completed in this sandbox.
-Infrastructure checks belong in WORKSPACE.md and are not learning evidence.
+### 2026-11-09 — Unit 7 opening retrieval
+
+- Explained why constructor validation plus public setters cannot protect lifetime invariants.
+- Justified specific exceptions and identified invalid-state failures; exact standard names needed minor reminders.
+- Correctly recalled stack-trace preservation, disposal on exceptional scope exit and disposal versus GC.
+- Unit 7 scores above reflect conceptual explanations only (2/4), with no independent coding evidence yet.
+- Follow-up: Apply validation through a state-preserving update, then revisit resource ownership.
+
+### 2026-11-09 — SalaryRange validation and safe updates
+
+- Status: Completed with targeted guidance; functional review passed and diagnostic wording corrected.
+- Starter: src/ExerciseWorkspace/SalaryRange.cs. Requirements: EXERCISE.md.
+- Initial starter: 12 requirement cases discovered and executed; all failed as expected.
+- First learner implementation: 10/12 cases pass. Constructor and Update both validate before assignments, protecting existing state on rejection. Both fail for (0, -1): the ordering check throws ArgumentException before the negative maximum check can throw ArgumentOutOfRangeException. Feedback targets validation precedence; no code edited by Codex.
+- Follow-up review: 12/12 requirement cases and the infrastructure test pass (13 total). Learner corrected validation precedence and extracted private static ValidateBounds, shared by both callers, following targeted guidance. No learner code edited by Codex.
+- Follow-up inspection confirms both negative-bound messages now say cannot be negative. Learner correctly explained type-level static membership; tutor clarified that this helper depends only on parameters.
+- Guard clauses/invariant preservation: 3/4 from independently validating before mutation. Exception-selection score remains 2/4 because precedence needed support. No broad mastery claim.
+- Infrastructure checks are not learner assessment evidence.
+
+### 2026-11-09 — Resource ownership predictions
+
+- Correctly explained why a borrowed stream should normally remain open for its owner.
+- Correctly predicted using-declaration lifetime on normal return and exception propagation; needed confirmation about enclosing scope.
+- Diagnosed returning a disposed stream and proposed caller-owned disposal with using around the returned resource.
+- Assessment: ownership 2/4; using semantics remain 2/4. These are chat reasoning results, not independent implementation evidence.
+- Follow-up: Practise ownership and cleanup in runnable code; revisit with a fresh example next study session.
+
+### 2026-11-09 — TextPreview resource-lifetime debugging
+
+- Status: First learner implementation reviewed; incomplete and set aside after curriculum-alignment feedback.
+- Files: src/ExerciseWorkspace/TextPreview.cs, RESOURCE-EXERCISE.md, tests/ExerciseWorkspace.Tests/TextPreviewTests.cs.
+- Starter deliberately closes borrowed streams and relies on that mistake to mask faulty owned-stream cleanup.
+- Baseline: Compiles; 3/6 tests pass and 3/6 fail as expected. Passing starter tests are not learner evidence.
+- API reminders supplied before implementation: StreamReader ownership and leaveOpen, ReadLine, Func<Stream> factory, null-coalescing throw and buffered reads.
+- Next action: Learner corrects ownership/cleanup; review stream and reader lifetimes on normal and exceptional exits.
+- First learner review: All 19 repository tests pass (6 TextPreview cases). LoadFirstLine now uses using to guarantee owned-stream cleanup on failure. ReadFirstLine removed using entirely, leaving its StreamReader undisposed; requirement 2 remains unmet despite passing stream-lifetime tests. LoadFirstLine also retains redundant explicit Dispose. Feedback asks how to dispose the reader without closing the borrowed stream. No learner code or tests edited, no mastery increase or completion recorded.
+
+### 2026-11-09 — Exception handling retrieval and ImportAttempt task
+
+- Correctly reasoned about meaningful handling, expected absence, rethrow/finally output, false filters and absence of automatic retry.
+- Scores reflect supported conceptual checks only; no independent implementation of these topics yet.
+- Learner requested tighter alignment with source material; TextPreview set aside without marking complete. Latest inspection shows redundant explicit stream disposal removed, but reader remains undisposed.
+- New task: src/ExerciseWorkspace/ImportAttempt.cs, EXCEPTION-EXERCISE.md and ImportAttemptTests.cs; based on Unit 7 sections 12–19. Action reminder supplied (Unit 5).
+- Baseline builds; all four new tests fail on NotImplementedException as expected. No solution supplied.
+- Follow-up: Review learner implementation, then revisit these concepts next study session with a fresh example.
+
+### 2026-11-09 — ImportAttempt final review and session pause
+
+- Result: All four relevant tests pass. Code review found no functional defects under the stated assumptions (non-null actions; onFinished does not throw).
+- Calls import once, returns true on success, filters IOException by handleIoFailure and returns false only for handled failures. Other exceptions propagate without unnecessary catch/rethrow.
+- finally invokes onFinished on success and all failure paths, including before returning a result.
+- Learner requested a when syntax reminder; implementation remained learner-authored. No code or tests changed by Codex during review.
+- Assessment: propagation, finally and filters each 3/4 for focused application; no integrated mastery claimed.
+- Lesson paused at learner's request. No new activities assigned during pause. Next review is the next study session, followed by approximately +3/+7/+21-day reviews as appropriate.
+
+### 2026-11-09 — U7-F01–F03 retrieval and application workflow
+
+- Retrieval: Correctly recalled validation precedence, false filters and finally before return; other catch blocks clarified. Correctly distinguished nullable annotations from runtime guarantees.
+- Exercise: JobApplication.Apply/Reject and ApplicationInbox.Add. Learner implementation passes all 9 targeted tests; no functional review findings.
+- Correctly protects the specified transitions, validates before mutation, retains an externally read-only status and guards null before storing input. Code and tests left unchanged.
+- Assessment: invalid-state exceptions 3/4, null guards 3/4; invariant protection remains 3/4. Standard argument-exception group remains 2/4 because earlier precedence required support.
+- Next: U7-F04 catch ordering. Revisit null guards and state preconditions next study session; extend intervals according to later performance.
+
+### 2026-11-09 — U7-F04–F07 review and LoadText
+
+- Catch ordering: Recognised that a broader catch makes the specific one unreachable, but initially predicted compilation success; clarified that C# rejects this ordering. Revisit once with a fresh example.
+- Custom exceptions: Correctly explained need for meaningful caller distinctions rather than a new name alone.
+- Boundary review: Identified loss of information when a broad catch turns storage failures into the same null result as expected absence.
+- LoadText: Four targeted tests pass; code review finds correct owned-reader disposal on normal and exceptional exits and unchanged failure propagation. No learner code edited.
+- Assessment: validation-boundary reasoning 2/4; custom-exception judgement 2/4; ownership and synchronous disposal 3/4 each. No unit-completion claim yet; async disposal remains unassessed.
+- Learner found the coding task too easy and reports a broader pattern. Adapt future practical work toward integrated reasoning and realistic debugging, without introducing unprepared API puzzles.
+
+### 2026-11-09 — Async disposal discussion and integrated task preparation
+
+- Correctly identified throw ex as losing stack-trace information in F08.
+- Requested a deeper explanation after the initial await-using mapping check was too obvious; discussion exposed uncertainty about synchronous cleanup duration versus asynchronous waiting. Record recognition only (1/4), not mastery after explanation.
+- Prepared F10 integrated batch importer to address difficulty feedback: source comments specify observable behaviour; learner chooses validation/control-flow design and exception scope. Reuses the existing LoadText implementation.
+- Baseline: 13 new tests discovered; build succeeds and starter cases fail as expected. No learner implementation or existing tests changed.
+- Status: Assigned; implementation and practical review pending. Completion cannot be inferred from preparation.
+
+### 2026-11-10 — ApplicationBatchImporter first implementation review
+
+- Result: 9/13 targeted tests pass; four fail for two distinct issues.
+- Correct: Argument null guards, input order/duplicates, successful-import counting, ordinary missing-file reporting, propagation of unrelated I/O and reporting failures, reuse of owned-reader helper.
+- Validation timing: Path entries are checked during processing; a later invalid entry is discovered only after an earlier missing-file callback has run. Three invalid-entry cases fail the before-any-side-effects contract.
+- Exception scope: The same try encloses LoadText and importText. FileNotFoundException from importText is misclassified as a missing source, reported and swallowed, so the batch continues. One callback-failure case fails.
+- Redundant catch/rethrow adds no behaviour; diagnostic observation, not another functional defect.
+- No learner code or tests changed; targeted feedback supplied. Exercise incomplete, no mastery upgrade; focused earlier scores do not imply integrated mastery.
+- Follow-up: Correct validation timing and read/callback exception boundaries, then re-review. Include these concepts in next-session retrieval.
+
+### 2026-11-10 — ApplicationBatchImporter corrected implementation
+
+- Result: 13/13 targeted tests pass; review found no functional defects against the stated contract.
+- Validates all entries before reads/callbacks. Try/catch now encloses only LoadText; a missing source is reported and skipped, while callback failures propagate. Successful count is incremented only after callback completion; redundant catch/rethrow removed.
+- Learner implemented corrections after feedback and explicit clarification about exception origin. Exercise complete with guidance; no score-4 or independent integrated mastery claim.
+- Minor conventions only: use PascalCase for ValidatePaths and correct successful spelling. No learner code or tests edited by Codex.
+- Initial Unit 7 practice is complete; retain targeted review for validation timing, exception scope, catch-order compiler rejection and async disposal. TextPreview stays set aside, not marked complete and not a progression blocker.
+- Next study session: fresh transfer examples; repeat around +3, +7 and +21 days as performance warrants. Async disposal remains Needs review at 1/4 until independently explained or applied.
 
 ## Next Session
 
-- Wait for an explicit request to begin practice or review.
+- Preparation completed on 2026-11-09 at the learner's request: SESSION.md contains ten ready activities spanning all remaining Unit 7 topic groups, targeted retrieval and integrated review.
+- New starters: JobApplication.cs (transitions and ApplicationInbox null guard) and ApplicationTextFile.cs (the unit's LoadText exercise). Concise instructions and filtered commands are in source comments.
+- Verification: Both projects build; 23 existing tests pass. Thirteen new cases are discovered: one supplied initial-state check passes and twelve fail on unimplemented starters, with no unexpected failure causes. Preparation supplies no new learner evidence or mastery scores.
+- F10 is complete with guidance. Briefly revisit the retained Unit 7 review items, then prepare Unit 8. Skip redundant easy checks and preserve all learner code; TextPreview remains set aside.
 - Read this record and the relevant source sections before preparing activities.
-- Use a brief mixed diagnostic or the requested unit; treat the learner as an experienced engineer returning to practice.
+- Ask one theory question at a time; treat the learner as an experienced engineer returning to practice.
 - Select one meaningful coding task from actual evidence; provide scaffolding and requirement tests without implementing the solution.
 - Update topic status, mastery, dates, evidence and review queue only after observed learner performance.
