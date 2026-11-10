@@ -1,6 +1,6 @@
 # Exercise workspace
 
-Unit 8 is prepared for a short teaching session in [SESSION.md](SESSION.md). Its single coding task is [InMemoryRepository.cs](src/ExerciseWorkspace/Unit8/InMemoryRepository.cs), with concise instructions and the test command in source comments. [Unit 7's session record](sessions/Unit7-2026-11-10.md) is preserved separately.
+Unit 8 initial practice is complete. [SESSION.md](SESSION.md) and [its session record](sessions/Unit8-2026-11-10.md) preserve the activities. The learner's [InMemoryRepository.cs](src/ExerciseWorkspace/Unit8/InMemoryRepository.cs) passes all eight requirement tests after guidance. Variance and snapshot handling remain scheduled for review. Next: prepare Unit 9 using the existing projects. [Unit 7's session record](sessions/Unit7-2026-11-10.md) is preserved separately.
 The integrated Unit 7 exit task, [ApplicationBatchImporter.cs](src/ExerciseWorkspace/ApplicationBatchImporter.cs), is complete with guidance; its 13 tests pass as of 2026-11-10. Initial Unit 7 practice is complete with targeted reviews retained in PROGRESS.md. Earlier learner implementations are preserved.
 The [stream ownership task](RESOURCE-EXERCISE.md) is set aside after the learner requested source-material-focused practice; its reader-disposal issue remains recorded.
 The completed [salary range task](EXERCISE.md) and learner implementation are preserved.
@@ -50,9 +50,8 @@ checks that the runner can load the referenced console assembly and find its ent
 Its success is not evidence of C# mastery or exercise completion. Exercise tests are
 now present as well. The initial Unit 7 tasks and integrated batch importer have been
 implemented and individually reviewed; the latest 13 batch-import tests pass.
-Unit 8 preparation builds successfully: 49 existing cases pass; eight repository
-starter cases fail on NotImplementedException as expected. Run the filtered command
-in InMemoryRepository.cs while implementing that task.
+Unit 8's completed repository passes its eight tests. The full solution now contains
+57 tests. These results do not remove the documented TextPreview reader-disposal issue.
 Use the filtered command in the active source file while working on each task.
 
 ## Verification on 2026-11-09

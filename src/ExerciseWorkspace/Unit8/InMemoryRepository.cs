@@ -24,20 +24,30 @@ public interface IRepository<T> where T : class
 // Reminder: ToArray()/ToList() create shallow collection copies; IEnumerable alone
 // does not protect a mutable backing collection. No variance is needed in this class.
 // Test: dotnet test --filter FullyQualifiedName~InMemoryRepositoryTests
-public class InMemoryRepository<T> : IRepository<T> where T : class
+public class InMemoryRepository<T> : IRepository<T> where T : class, IEntity
 {
+
+    private readonly Dictionary<Guid, T> _items = [];
+
     public void Add(T item)
     {
-        throw new NotImplementedException();
+        ArgumentNullException.ThrowIfNull(item);
+        if (GetById(item.Id) != null)
+            throw new ArgumentException("Item already exists", nameof(item));
+        
+        _items.Add(item.Id, item);        
     }
 
     public T? GetById(Guid id)
     {
-        throw new NotImplementedException();
+        _items.TryGetValue(id, out T? value);
+
+        return value;
     }
 
     public IEnumerable<T> GetAll()
     {
-        throw new NotImplementedException();
+        var list = _items.Values.ToList();
+        return list;
     }
 }

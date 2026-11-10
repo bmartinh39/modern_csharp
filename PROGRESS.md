@@ -2,11 +2,11 @@
 
 ## Overview
 
-- Current unit: Unit 8 — Generics & Abstractions (compact session prepared).
-- Current topic: Preparation complete; teaching and learner assessment have not started.
+- Current unit: Unit 8 — Generics & Abstractions (initial practice complete).
+- Current topic: Compact session complete; targeted variance and snapshot review pending.
 - Record initialized: 2026-11-09.
-- Last study session: 2026-11-10 — integrated batch importer corrected and reviewed; all 13 targeted tests pass.
-- Next recommended activity: In the next chat, start SESSION.md U8-01 in teaching mode, then the single repository task. Keep Unit 8 short; skip redundant checks. Initial Unit 7 practice is complete with review items retained.
+- Last study session: 2026-11-10 — Unit 8 compact session; repository passes 8/8 targeted tests after guidance.
+- Next recommended activity: Prepare Unit 9 with brief Unit 8 retrieval; retain Unit 7 async-disposal review. Do not restart Unit 8.
 - Git checkpoint: Unit 7 code, tests, progress and workflow committed as 9154aae and pushed to origin/main on 2026-11-10. Detailed session archived in sessions/Unit7-2026-11-10.md.
 - Session preference: Ask theory questions one at a time so the learner can focus.
 - Difficulty feedback: Learner finds coding exercises too easy. Prefer realistic integrated implementation, debugging and design decisions. Specify observable requirements clearly without prescribing every language construct; give API/syntax reminders directly when needed. Avoid extending practice with trivial tasks already demonstrated.
@@ -43,7 +43,7 @@
 | 5 — LINQ, Lambdas, Delegates & IEnumerable | Introduced; previously covered | 21/21 (100%) | — | 0/21 | — |
 | 6 — Modern Modelling, Equality & Pattern Matching | Introduced; previously covered | 18/18 (100%) | — | 0/18 | — |
 | 7 — Defensive C# & Resource Management | Needs review; initial practice complete | 16/16 (100%) | 2.44/4 | 16/16 | 2026-11-10 |
-| 8 — Generics & Abstractions | Introduced; previously covered | 16/16 (100%) | — | 0/16 | — |
+| 8 — Generics & Abstractions | Needs review; initial practice complete | 16/16 (100%) | 2.00/4 | 5/16 | 2026-11-10 |
 | 9 — Async C# | Introduced; previously covered | 27/27 (100%) | — | 0/27 | — |
 
 ## Unit 1 — C# Fundamentals Refresher
@@ -227,16 +227,16 @@ Source: [8 Generics & Abstractions 40dea85eec91802d8f45dbceeddf6286](material/8%
 | [x] | Generic types and multiple type parameters | Introduced | — | — | — | P |
 | [x] | Generic methods and type inference | Introduced | — | — | — | P |
 | [x] | Type safety versus `object` and casts | Introduced | — | — | — | P |
-| [x] | Unconstrained `T` and the purpose of constraints | Introduced | — | — | — | P |
+| [x] | Unconstrained `T` and the purpose of constraints | Practising | 3 | 2026-11-10 | 2026-11-13 | Diagnosed missing Id guarantee and correctly implemented class, IEntity constraint. |
 | [x] | `where`: class, struct, base class, interface, new() | Introduced | — | — | — | P |
 | [x] | Combining constraints | Introduced | — | — | — | P |
-| [x] | Generic interfaces and reusable abstractions | Introduced | — | — | — | P |
+| [x] | Generic interfaces and reusable abstractions | Practising | 3 | 2026-11-10 | 2026-11-13 | Implemented supplied IRepository<T> with typed lookup for two entity types; dictionary/snapshot guidance needed, so no independent integrated mastery claim. |
 | [x] | Useful generic abstractions versus premature generalisation | Introduced | — | — | — | P |
 | [x] | Generic extension methods | Introduced | — | — | — | P |
 | [x] | Delegates with generics: Func and Action | Introduced | — | — | — | P |
-| [x] | Generic invariance and why mutable collections cannot freely convert | Introduced | — | — | — | P |
-| [x] | Covariance (`out`) and producer interfaces | Introduced | — | — | — | P |
-| [x] | Contravariance (`in`) and consumer interfaces | Introduced | — | — | — | P |
+| [x] | Generic invariance and why mutable collections cannot freely convert | Needs review | 1 | 2026-11-10 | Next study session | Predicted List conversion compiles while identifying mixed-type insertion risk; compiler protection explained. |
+| [x] | Covariance (`out`) and producer interfaces | Practising | 2 | 2026-11-10 | Next study session | Reasoned enumeration-only conversion is safe after explanation; purpose required a reuse example. |
+| [x] | Contravariance (`in`) and consumer interfaces | Needs review | 1 | 2026-11-10 | Next study session | Tentatively accepted Animal handler as Dog handler after explanation; independent safety reasoning pending. |
 | [x] | Tuples and named tuple elements | Introduced | — | — | — | P |
 | [x] | Deconstruction | Introduced | — | — | — | P |
 | [x] | `nameof` for parameter names and refactoring | Introduced | — | — | — | P |
@@ -279,10 +279,13 @@ Source: [9 Async C# 40dea85eec9180be9557cd6855bc21cd](material/9%20Async%20C%23%
 
 ## Spaced Repetition Queue
 
-Initial conceptual retrieval and focused validation implementation reviewed. Resource-management implementation remains unassessed.
+Unit 7 focused implementation and Unit 8 compact practice reviewed; retain supported concepts for fresh transfer checks.
 
 | Topic | Priority | Last assessed | Next review | Evidence / action |
 |-------|----------|---------------|-------------|-------------------|
+| Unit 8 variance safety | High | 2026-11-10 | Next study session | Fresh invariant-list and consumer-direction checks; then approximately 2026-11-13, 2026-11-17 and 2026-12-01 as performance warrants. |
+| Unit 8 dictionary values, snapshots and as conversions | Medium | 2026-11-10 | Next study session | Distinguish entries from entities, shallow membership copies and conversion from transformation; implementation needed guidance. |
+| Unit 8 constraints and typed abstractions | Low | 2026-11-10 | 2026-11-13 | Fresh short transfer check, followed by approximately +7/+21-day reviews. |
 | Unit 7 exception selection | Medium | 2026-11-09 | Next study session | Distinguish bad arguments from invalid state using fresh scenarios; exact API names needed reminders. |
 | Unit 7 async disposal: cleanup completion versus thread blocking | High | 2026-11-09 | Next study session | Distinguish synchronous from immediate; await does not guarantee thread release. Recognised syntax but conceptual understanding after explanation is not yet verified. |
 | Unit 7 propagation, filters and finally | Low | 2026-11-09 | Next study session | Correct focused implementation; revisit with a different failure-handling scenario, then approximately +3/+7/+21 days as appropriate. |
@@ -396,16 +399,28 @@ No persistent conceptual weakness established. Some standard exception names nee
 - Initial Unit 7 practice is complete; retain targeted review for validation timing, exception scope, catch-order compiler rejection and async disposal. TextPreview stays set aside, not marked complete and not a progression blocker.
 - Next study session: fresh transfer examples; repeat around +3, +7 and +21 days as performance warrants. Async disposal remains Needs review at 1/4 until independently explained or applied.
 
+### 2026-11-10 — U8-01–03 retrieval, constraints and repository review
+
+- Correctly identified dictionary key/value type arguments and Func<Company, bool> signature. Recognised ambiguous exception origin when reading and a callback share a catch scope.
+- Explained that unconstrained T lacks an Id guarantee and proposed an interface constraint; correctly implemented class, IEntity.
+- Repository: 8/8 targeted tests pass after correction. Null and duplicate guards, typed lookup, expected absence and stored-instance identity are correct.
+- Support: Dictionary storage and relevant APIs suggested; shallow snapshot explained with ToList hint. First GetAll enumerated key/value pairs and attempted an incompatible as conversion, returning null (3/8 tests passed). After explanation of Values and conversion versus transformation, learner corrected it to Values.ToList().
+- No learner code or tests edited by Codex. At this checkpoint the implementation was complete with guidance and the design check was pending; it was subsequently discussed below. Passing tests do not imply independent snapshot mastery.
+- Follow-up: Revisit dictionary entries versus values, shallow snapshots and failed as conversions next study session; extend to approximately +3/+7/+21 days according to performance.
+
+### 2026-11-10 — U8-03 design check and U8-04–06 session finish
+
+- Repository design: proposed business-driven boundaries and grouping related entities; concrete justification versus automatic EF wrappers clarified.
+- Correctly inferred Company, identified changing contents between enumerations and proposed one foreach with two counters. Repeated work/side effects explained.
+- Invariance: initially predicted List<Dog> can convert to List<Animal>, despite recognising non-Dog insertion risk. Compiler protection explained. Subsequently recognised IEnumerable conversion safety; practical purpose explained with a reuse example.
+- Contravariance: tentative correct acceptance only, without independent explanation. Recognition-level assessment retained.
+- Exit: correctly explained loss of specific typing with object and need for casts, versus constrained generics. Runtime-failure consequence clarified.
+- Extension syntax, tuples and deconstruction explained but not directly assessed. Other correct retrieval (type arguments, Func) and nameof use recorded as evidence without claiming broad topic mastery. Remaining topic scores stay unassessed pending fuller checks.
+- Initial practice complete. Repository passes 8/8 tests after guidance. No learner code or tests changed by Codex. Next: prepare Unit 9 and carry forward targeted review; no extra Unit 8 assignment.
+
 ## Next Session
 
-- Unit 8 preparation completed on 2026-11-10: SESSION.md contains six core activities (including one coding task) plus two optional alternatives, adapted to the learner's request for a short unit.
-- Starter: src/ExerciseWorkspace/Unit8/InMemoryRepository.cs. Eight tests cover two entity types, identity, null/duplicate input, expected absence and snapshot protection. Original learner types remain unchanged. No solution supplied.
-- Verification: Both projects build; 49 existing cases pass and eight starter cases fail on NotImplementedException as expected. Preparation changes no mastery scores.
-- Next chat: begin U8-01 one prompt at a time; do not regenerate scaffolding or expand into an exhaustive generics course.
-- Preserve the Unit 7 checkpoint and learner implementations. Review items remain scheduled; no Unit 8 mastery scores have been assigned.
-- Unit 7 checkpoint verification passed all 49 tests; Unit 8 now adds the eight intentionally failing starter tests described above.
-- Retain brief Unit 7 review without restarting completed work. TextPreview remains set aside; its passing tests do not establish correct reader disposal.
-- Read this record and the relevant source sections before preparing activities.
-- Ask one theory question at a time; treat the learner as an experienced engineer returning to practice.
-- Select one meaningful coding task from actual evidence; provide scaffolding and requirement tests without implementing the solution.
-- Update topic status, mastery, dates, evidence and review queue only after observed learner performance.
+- Prepare Unit 9 from its source using the existing solution and projects. Unit 8 U8-01–06 are complete; do not restart them.
+- Retain short variance/snapshot retrieval and Unit 7 async-disposal review. Use fresh examples and ask one question at a time.
+- Unit 8 repository passes 8/8 tests after guidance. Preserve learner implementations; TextPreview remains set aside with its reader-disposal issue documented.
+- SESSION.md and sessions/Unit8-2026-11-10.md preserve the completed activities. Unit 9 scaffolding has not been prepared.

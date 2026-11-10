@@ -1,10 +1,10 @@
 ﻿# Unit 8 — Compact teaching session
 
-Status: Prepared on 2026-11-10; teaching has not started. Start at U8-01.
+Status: Initial practice complete on 2026-11-10. U8-01–06 finished; support and assessment limits recorded in PROGRESS.md. Next: prepare Unit 9 with targeted review.
 Goal: One meaningful coding task plus brief reasoning checks. Aim for one short session;
 skip redundant questions when competence is clear, not mandatory completion of every prompt.
 Primary source: material/8 Generics & Abstractions 40dea85eec91802d8f45dbceeddf6286.md.
-Prior reading is recorded, but all Unit 8 mastery remains unassessed.
+Prior reading is recorded; current assessment evidence is recorded in PROGRESS.md.
 
 ## Teaching rules
 
@@ -22,7 +22,7 @@ Prior reading is recorded, but all Unit 8 mastery remains unassessed.
 ### U8-01 — Retrieval (3 short prompts)
 
 Unit/topics: 8 generic type arguments, 5 delegates, 7 exception scope.
-Type/difficulty: Retrieval / Foundation. Status: Ready.
+Type/difficulty: Retrieval / Foundation. Status: Complete; correct type-argument/delegate answers and exception-origin reasoning.
 Sources: sections 1–6; Unit 7 batch-import review. Files/tests: Chat only.
 Ask individually, moving quickly:
 1. In Dictionary<Guid, Company>, what do the two type arguments specify?
@@ -34,7 +34,7 @@ Do not restart beginner exercises for concepts the learner already explains clea
 ### U8-02 — Constraints: explain, then diagnose
 
 Unit/topics: 8 generic methods, inference, unconstrained T and combined constraints.
-Type/difficulty: Explain + debugging / Application. Status: Ready.
+Type/difficulty: Explain + debugging / Application. Status: Complete; identified missing interface guarantee, then implemented constraint correctly.
 Sources: sections 3–13. Files/tests: Chat only; prepares U8-03.
 Briefly explain class versus method type parameters, inferred T, and where constraints.
 Use the source's IHasName/GetName example; explain class/struct/base/interface/new()
@@ -52,7 +52,7 @@ What compile-time guarantee is missing? Provide names/syntax directly if forgott
 
 Unit/topics: 8 constraints, generic type/interface, useful abstraction; 4 collection
 encapsulation; 7 guards and expected absence.
-Type/difficulty: Implementation / Application. Status: Ready; implementation pending.
+Type/difficulty: Implementation / Application. Status: Complete with guidance; 8/8 tests pass. Business-driven design check discussed.
 Sources: sections 14–15 and 25.
 Starter/spec: src/ExerciseWorkspace/Unit8/InMemoryRepository.cs (all requirements in comments).
 Tests: tests/ExerciseWorkspace.Tests/Unit8/InMemoryRepositoryTests.cs, 8 cases.
@@ -68,7 +68,7 @@ around every EF Core entity, or what concrete need would justify that abstractio
 
 Unit/topics: 8 method inference, extension syntax, Func, tuples, deconstruction, nameof;
 5 multiple enumeration interleave.
-Type/difficulty: Worked-example review / Application. Status: Ready.
+Type/difficulty: Worked-example review / Application. Status: Complete; inference and single-pass reasoning correct. Extensions, tuples and deconstruction explained, not directly assessed.
 Sources: sections 16–17 and 22–24. Files/tests: Chat only; no extra coding assignment.
 First explain this on the first parameter, named tuple return syntax and deconstruction
 with a different tiny example. Then present this review snippet (not an assignment solution):
@@ -93,7 +93,7 @@ skip if the learner already demonstrates it. No solutions to pending prediction 
 ### U8-05 — Variance through safety
 
 Unit/topics: 8 invariance, covariance, contravariance.
-Type/difficulty: Explain + prediction / Application. Status: Ready.
+Type/difficulty: Explain + prediction / Application. Status: Complete with support; invariance misconception corrected, covariance supported, contravariance recognition only. Review queued.
 Sources: sections 18–21. Files/tests: Chat only.
 Explain producers/out and consumers/in using the source's Animal/Dog examples.
 State that these generic variance conversions concern reference types; no advanced API design.
@@ -112,7 +112,7 @@ Do not demand memorisation of every variance rule.
 ### U8-06 — Exit and stop
 
 Unit/topics: 8 constraints and abstraction judgement.
-Type/difficulty: Integrated reasoning / Application. Status: Ready.
+Type/difficulty: Integrated reasoning / Application. Status: Complete; explained object/casts versus constrained typing. Initial practice ended.
 Sources: sections 15, 25–27. Files/tests: Reviewed repository, no new scaffolding.
 Ask one compact transfer question: If the repository were rewritten around object,
 which compile-time guarantees would callers lose and where would casts/failures move?
@@ -125,7 +125,7 @@ No extra exercises just to fill the queue. Proceed toward Unit 9 when ready.
 ### U8-A1 — Constraint discrimination
 
 Unit/topics: 8 class/struct/new() versus interface capability.
-Type/difficulty: Debugging / Foundation. Status: Reserve, not mandatory.
+Type/difficulty: Debugging / Foundation. Status: Not used; reserve for later review if needed.
 Sources: sections 8–12. Files/tests: Chat only.
 Prompt: Adding where T : class does not make value.Id compile. Why not?
 Would new() guarantee Id? Ask for the capability actually needed, without adding another project.
@@ -133,7 +133,7 @@ Would new() guarantee Id? Ask for the capability actually needed, without adding
 ### U8-A2 — Variance safety alternative
 
 Unit/topics: 8 covariance/contravariance.
-Type/difficulty: Prediction / Foundation. Status: Reserve, not mandatory.
+Type/difficulty: Prediction / Foundation. Status: Not used; reserve for later review if needed.
 Sources: sections 18–21. Files/tests: Chat only.
 Prompt: A handler accepts every Animal. What promise does it already make about Dogs?
 Conversely, can a Dog-only handler safely process every Animal? Ask one direction at a time.
@@ -148,12 +148,19 @@ Unit 7 record: sessions/Unit7-2026-11-10.md. Repository code and test fixtures a
 
 ## Next chat
 
-Start Unit 8 in teaching mode. Read AGENTS.md, PROGRESS.md and this file. Present U8-01
-one prompt at a time, skip redundant checks, and use the prepared repository task.
-Do not regenerate scaffolding, reveal the implementation or prolong basic questions.
+Prepare Unit 9 from its source using the AGENTS.md transition workflow. Do not restart
+Unit 8 or regenerate its repository scaffolding. Retain brief variance and snapshot
+retrieval; Unit 7 async disposal fits Unit 9. See PROGRESS.md for actual results.
 
 ## Preparation verification
 
 One solution build/test pass on 2026-11-10: 49 existing cases pass; eight new cases
 fail on NotImplementedException as expected. No learner code changed, no packages
 added, no solutions supplied, and no mastery inferred from preparation.
+
+## Completion verification — 2026-11-10
+
+Full solution: 57/57 tests pass with dotnet test ModernCSharp.slnx --no-restore.
+The learner's repository implementation is preserved. Snapshot work required guidance;
+variance needs fresh retrieval. TextPreview remains set aside despite passing tests.
+Completed session archived in sessions/Unit8-2026-11-10.md before Unit 9 preparation.
