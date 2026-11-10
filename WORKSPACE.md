@@ -1,6 +1,6 @@
 # Exercise workspace
 
-Infrastructure prepared on 2026-11-09. Unit 8 is selected; planning has not started. The active handoff is in [SESSION.md](SESSION.md); [Unit 7's session record](sessions/Unit7-2026-11-10.md) is preserved separately.
+Unit 8 is prepared for a short teaching session in [SESSION.md](SESSION.md). Its single coding task is [InMemoryRepository.cs](src/ExerciseWorkspace/Unit8/InMemoryRepository.cs), with concise instructions and the test command in source comments. [Unit 7's session record](sessions/Unit7-2026-11-10.md) is preserved separately.
 The integrated Unit 7 exit task, [ApplicationBatchImporter.cs](src/ExerciseWorkspace/ApplicationBatchImporter.cs), is complete with guidance; its 13 tests pass as of 2026-11-10. Initial Unit 7 practice is complete with targeted reviews retained in PROGRESS.md. Earlier learner implementations are preserved.
 The [stream ownership task](RESOURCE-EXERCISE.md) is set aside after the learner requested source-material-focused practice; its reader-disposal issue remains recorded.
 The completed [salary range task](EXERCISE.md) and learner implementation are preserved.
@@ -11,8 +11,8 @@ Existing course material and learner code are preserved; AGENTS.md includes the 
 The full solution test run passes all 49 tests. TextPreview's unassessed reader-disposal
 issue remains documented despite its passing stream-lifetime tests.
 Unit 7 learner source, tests, progress, session notes and workflow were committed as
-`9154aae` and pushed to `origin/main`. Unit 8 uses the same solution and projects;
-its exercise scaffolding will be prepared when planning is requested.
+`9154aae` and pushed to `origin/main`. Unit 8 reuses the same solution and projects;
+its starter and tests are in the corresponding Unit8 folders.
 Generated bin/obj/TestResults files are ignored. No reorganisation is needed to build
 or begin Unit 8. Follow AGENTS.md's transition workflow when moving on.
 
@@ -50,6 +50,9 @@ checks that the runner can load the referenced console assembly and find its ent
 Its success is not evidence of C# mastery or exercise completion. Exercise tests are
 now present as well. The initial Unit 7 tasks and integrated batch importer have been
 implemented and individually reviewed; the latest 13 batch-import tests pass.
+Unit 8 preparation builds successfully: 49 existing cases pass; eight repository
+starter cases fail on NotImplementedException as expected. Run the filtered command
+in InMemoryRepository.cs while implementing that task.
 Use the filtered command in the active source file while working on each task.
 
 ## Verification on 2026-11-09

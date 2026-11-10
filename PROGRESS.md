@@ -2,11 +2,11 @@
 
 ## Overview
 
-- Current unit: Unit 8 — Generics & Abstractions (selected; planning pending).
-- Current topic: Unit transition ready; no Unit 8 activity assigned or assessed yet.
+- Current unit: Unit 8 — Generics & Abstractions (compact session prepared).
+- Current topic: Preparation complete; teaching and learner assessment have not started.
 - Record initialized: 2026-11-09.
 - Last study session: 2026-11-10 — integrated batch importer corrected and reviewed; all 13 targeted tests pass.
-- Next recommended activity: On request, prepare the Unit 8 activity batch from the source material, carrying forward brief Unit 7 review. Initial Unit 7 practice is complete with review items retained.
+- Next recommended activity: In the next chat, start SESSION.md U8-01 in teaching mode, then the single repository task. Keep Unit 8 short; skip redundant checks. Initial Unit 7 practice is complete with review items retained.
 - Git checkpoint: Unit 7 code, tests, progress and workflow committed as 9154aae and pushed to origin/main on 2026-11-10. Detailed session archived in sessions/Unit7-2026-11-10.md.
 - Session preference: Ask theory questions one at a time so the learner can focus.
 - Difficulty feedback: Learner finds coding exercises too easy. Prefer realistic integrated implementation, debugging and design decisions. Specify observable requirements clearly without prescribing every language construct; give API/syntax reminders directly when needed. Avoid extending practice with trivial tasks already demonstrated.
@@ -398,9 +398,12 @@ No persistent conceptual weakness established. Some standard exception names nee
 
 ## Next Session
 
-- Unit 8 is selected; wait for the learner's planning request before creating its activity queue or coding scaffolding. SESSION.md holds the planning handoff, not a prepared lesson.
+- Unit 8 preparation completed on 2026-11-10: SESSION.md contains six core activities (including one coding task) plus two optional alternatives, adapted to the learner's request for a short unit.
+- Starter: src/ExerciseWorkspace/Unit8/InMemoryRepository.cs. Eight tests cover two entity types, identity, null/duplicate input, expected absence and snapshot protection. Original learner types remain unchanged. No solution supplied.
+- Verification: Both projects build; 49 existing cases pass and eight starter cases fail on NotImplementedException as expected. Preparation changes no mastery scores.
+- Next chat: begin U8-01 one prompt at a time; do not regenerate scaffolding or expand into an exhaustive generics course.
 - Preserve the Unit 7 checkpoint and learner implementations. Review items remain scheduled; no Unit 8 mastery scores have been assigned.
-- Latest verification: Full solution test run passes all 49 tests. No new source/test changes were needed for the unit transition.
+- Unit 7 checkpoint verification passed all 49 tests; Unit 8 now adds the eight intentionally failing starter tests described above.
 - Retain brief Unit 7 review without restarting completed work. TextPreview remains set aside; its passing tests do not establish correct reader disposal.
 - Read this record and the relevant source sections before preparing activities.
 - Ask one theory question at a time; treat the learner as an experienced engineer returning to practice.
