@@ -2,13 +2,14 @@
 
 ## Overview
 
-- Current unit: Unit 8 — Generics & Abstractions (initial practice complete).
-- Current topic: Compact session complete; targeted variance and snapshot review pending.
+- Current unit: Unit 9 — Async C# (intensive session prepared; not yet assessed).
+- Current topic: Preparation complete; next start U9-01 retrieval, one question at a time.
 - Record initialized: 2026-11-09.
 - Last study session: 2026-11-10 — Unit 8 compact session; repository passes 8/8 targeted tests after guidance.
-- Next recommended activity: Prepare Unit 9 with brief Unit 8 retrieval; retain Unit 7 async-disposal review. Do not restart Unit 8.
+- Next recommended activity: Start SESSION.md U9-01 in teaching mode, then execution/composition/cancellation blocks before the main service. Use natural pauses after substantial coding; retain Unit 7 disposal and Unit 8 variance/snapshot reviews.
 - Git checkpoint: Unit 7 code, tests, progress and workflow committed as 9154aae and pushed to origin/main on 2026-11-10. Detailed session archived in sessions/Unit7-2026-11-10.md.
 - Session preference: Ask theory questions one at a time so the learner can focus.
+- Unit 9 intensity preference (2026-11-10): More intensive than Unit 8; use deeper predictions, integrated composition, lifetime debugging and async-stream practice. Multiple study blocks are acceptable; do not dump all questions or reveal solutions.
 - Difficulty feedback: Learner finds coding exercises too easy. Prefer realistic integrated implementation, debugging and design decisions. Specify observable requirements clearly without prescribing every language construct; give API/syntax reminders directly when needed. Avoid extending practice with trivial tasks already demonstrated.
 - Exercise format preference: Concise requirements, essential reminders and the test command belong in the C# file's comments; SESSION.md indexes activities rather than duplicating coding specifications.
 - Curriculum preference: Questions and exercises should test the actual source material. Do not make incidental APIs outside the units (such as StreamReader.leaveOpen) the assessed concept; provide any necessary API details directly.
@@ -420,7 +421,10 @@ No persistent conceptual weakness established. Some standard exception names nee
 
 ## Next Session
 
-- Prepare Unit 9 from its source using the existing solution and projects. Unit 8 U8-01–06 are complete; do not restart them.
-- Retain short variance/snapshot retrieval and Unit 7 async-disposal review. Use fresh examples and ask one question at a time.
-- Unit 8 repository passes 8/8 tests after guidance. Preserve learner implementations; TextPreview remains set aside with its reader-disposal issue documented.
-- SESSION.md and sessions/Unit8-2026-11-10.md preserve the completed activities. Unit 9 scaffolding has not been prepared.
+- Unit 9 preparation completed on 2026-11-10 using the Unit 9 source and existing projects. SESSION.md contains 12 varied activities, with three practical blocks (service composition, resource lifetime including async cleanup, and stream consumption). No solutions supplied.
+- Start U9-01, one question at a time. Teach prerequisite APIs before assignment; do not regenerate the starters. Natural pauses after U9-07 and U9-09.
+- Starters: src/ExerciseWorkspace/Unit9/ApplicationDetailsService.cs, AsyncResourceWorkflow.cs, ApplicationStreamConsumer.cs. Concise specifications and filtered commands are in source comments; tests are in tests/ExerciseWorkspace.Tests/Unit9/.
+- One full solution verification pass: both projects compile; 81 cases discovered, 59 pass and 22 fail. All 57 prior cases pass. Of 24 Unit 9 cases, two deliberate-debugging starter cases already pass; all other failures are expected starter failures, not infrastructure failures. No learner assessment or mastery increase from preparation.
+- No packages, projects, external services or changes to learner implementations. TaskCompletionSource/WaitAsync probes are supplied test infrastructure, not independent learning requirements.
+- Retain brief variance/snapshot retrieval and Unit 7 async-disposal review. Unit 8's completed record is sessions/Unit8-2026-11-10.md; TextPreview remains set aside.
+- Unit 8 checkpoint 1261f23 was pushed before preparation. Unit 9 teaching has not started; record actual support and performance after coding reviews/session end.

@@ -1,166 +1,225 @@
-﻿# Unit 8 — Compact teaching session
+﻿# Unit 9 — Async C#: intensive practice
 
-Status: Initial practice complete on 2026-11-10. U8-01–06 finished; support and assessment limits recorded in PROGRESS.md. Next: prepare Unit 9 with targeted review.
-Goal: One meaningful coding task plus brief reasoning checks. Aim for one short session;
-skip redundant questions when competence is clear, not mandatory completion of every prompt.
-Primary source: material/8 Generics & Abstractions 40dea85eec91802d8f45dbceeddf6286.md.
-Prior reading is recorded; current assessment evidence is recorded in PROGRESS.md.
+Status: Prepared on 2026-11-10; teaching and learner assessment not started.
+Start: U9-01, one question at a time. Preparation is not assessment evidence.
+Source: material/9 Async C# 40dea85eec9180be9557cd6855bc21cd.md.
+Previous session: sessions/Unit8-2026-11-10.md (archived); learner code preserved.
 
-## Teaching rules
+## Teaching workflow
 
-- Ask one question at a time. No worksheet dump, setup or tool calls between theory answers.
-- Explain unfamiliar syntax before testing it; remind directly when a familiar name is rusty.
-- Keep explanations focused; do not read all material again during this prepared session.
-- Code requirements and the filtered test command are in the source comments.
-- Inspect implementation and run relevant tests when the learner requests review.
-- Update progress at coding review/session end, retaining evidence and support needed.
-- Preserve all Unit 7 code; TextPreview remains set aside, not a progression blocker.
-- Unit 7 async-disposal uncertainty can be revisited with Unit 9; do not derail this compact unit.
+- Intensive means deeper reasoning and integrated coding, not a large quiz dump.
+- Work across multiple study blocks if useful; natural pauses after U9-07 and U9-09.
+- Present one question/activity at a time. Skip checks already clearly demonstrated.
+- Explain prerequisites before requiring them. Give API/syntax reminders directly.
+- Teach Task/await and cancellation before the service; async disposal before the
+  second resource method; async iteration and WithCancellation before stream coding.
+- Use chat for teaching/hints; source comments contain coding specifications and commands.
+- No tool calls between ordinary theory answers. Inspect/run only the relevant tests
+  at coding review. Update progress after substantial coding or at session end.
+- Tests use supplied controllable tasks/probes; TaskCompletionSource, WaitAsync and
+  test-probe ValueTask code are instructor infrastructure, not learner prerequisites.
+- Check code for blocking/detached work and reasoning as well as passing tests.
+- Retain Unit 7 async-disposal and Unit 8 variance/snapshot reviews, without restarting units.
+- Do not teach advanced schedulers, Channels, custom awaiters, or exhaustive aggregate
+  exception internals. No databases, HTTP services, additional projects or packages.
 
-## Core activities
+## Activity queue
 
-### U8-01 — Retrieval (3 short prompts)
+### U9-01 — Retrieval and interleaving
+Unit/topics: 9 Task and workloads; 7 ownership; 8 consumer variance.
+Type/difficulty: Retrieval / Foundation. Status: Ready.
+Source: sections 1, 4–6; prior review queue. Files/tests: Chat only.
+Ask individually:
+1. A method returns Task<string>. What do you have before awaiting it?
+2. How does waiting for a database response differ from calculating a large hash?
+3. A callback accepts every Animal. Can it safely be passed where Action<Dog> is expected? Why?
+4. Why must an owned stream outlive the operation consuming it?
+Use answers to tune explanation depth. No answers supplied until learner responds.
 
-Unit/topics: 8 generic type arguments, 5 delegates, 7 exception scope.
-Type/difficulty: Retrieval / Foundation. Status: Complete; correct type-argument/delegate answers and exception-origin reasoning.
-Sources: sections 1–6; Unit 7 batch-import review. Files/tests: Chat only.
-Ask individually, moving quickly:
-1. In Dictionary<Guid, Company>, what do the two type arguments specify?
-2. What inputs and output does Func<Company, bool> represent?
-3. If file reading and its consumer callback can both throw FileNotFoundException,
-   why might one try around both operations hide the wrong failure?
-Do not restart beginner exercises for concepts the learner already explains clearly.
-
-### U8-02 — Constraints: explain, then diagnose
-
-Unit/topics: 8 generic methods, inference, unconstrained T and combined constraints.
-Type/difficulty: Explain + debugging / Application. Status: Complete; identified missing interface guarantee, then implemented constraint correctly.
-Sources: sections 3–13. Files/tests: Chat only; prepares U8-03.
-Briefly explain class versus method type parameters, inferred T, and where constraints.
-Use the source's IHasName/GetName example; explain class/struct/base/interface/new()
-constraints and combining only those actually needed (new() last). Keep it brief.
-Then present:
-
+### U9-02 — Execution before and after await
+Unit/topics: 9 synchronous prefix, incomplete/completed awaits, Task versus thread.
+Type/difficulty: Explanation + prediction / Application. Status: Ready.
+Source: sections 2–13. Files/tests: Chat only.
+Explain task completion/result/fault/cancellation, async return types, synchronous work
+before first incomplete await, continuation, and no guaranteed thread switch.
+Present after explanation:
 ```csharp
-static Guid ReadId<T>(T entity) => entity.Id;
-```
-
-Ask: Why can this fail to compile even if every current caller passes an entity?
-What compile-time guarantee is missing? Provide names/syntax directly if forgotten.
-
-### U8-03 — One generic repository
-
-Unit/topics: 8 constraints, generic type/interface, useful abstraction; 4 collection
-encapsulation; 7 guards and expected absence.
-Type/difficulty: Implementation / Application. Status: Complete with guidance; 8/8 tests pass. Business-driven design check discussed.
-Sources: sections 14–15 and 25.
-Starter/spec: src/ExerciseWorkspace/Unit8/InMemoryRepository.cs (all requirements in comments).
-Tests: tests/ExerciseWorkspace.Tests/Unit8/InMemoryRepositoryTests.cs, 8 cases.
-Command: dotnet test --filter FullyQualifiedName~InMemoryRepositoryTests
-Use the supplied entity contract and repository interface; learner chooses storage and
-adds the entity constraint. Test fixture entities avoid changing Unit 7 learner types.
-Review constraint correctness in code as well as runtime tests. Assess null/duplicate
-handling, typed lookup, absence and snapshot behaviour. Do not rewrite cosmetic details.
-One design check after review: Would this exercise justify adding generic repositories
-around every EF Core entity, or what concrete need would justify that abstraction?
-
-### U8-04 — Generic extension, delegate and tuple review
-
-Unit/topics: 8 method inference, extension syntax, Func, tuples, deconstruction, nameof;
-5 multiple enumeration interleave.
-Type/difficulty: Worked-example review / Application. Status: Complete; inference and single-pass reasoning correct. Extensions, tuples and deconstruction explained, not directly assessed.
-Sources: sections 16–17 and 22–24. Files/tests: Chat only; no extra coding assignment.
-First explain this on the first parameter, named tuple return syntax and deconstruction
-with a different tiny example. Then present this review snippet (not an assignment solution):
-
-```csharp
-public static (int Total, int Matches) Inspect<T>(
-    this IEnumerable<T> source, Func<T, bool> predicate)
+static async Task TraceAsync(Task gate)
 {
-    ArgumentNullException.ThrowIfNull(source);
-    ArgumentNullException.ThrowIfNull(predicate);
-    return (source.Count(), source.Count(predicate));
+    Console.WriteLine("inside: start");
+    await gate;
+    Console.WriteLine("inside: end");
+}
+Console.WriteLine("caller: before");
+var task = TraceAsync(gate);
+Console.WriteLine("caller: after call");
+await task;
+Console.WriteLine("caller: done");
+```
+Assume supplied gate is incomplete and released only after caller: after call.
+Ask for output order. Then separately ask what changes if gate is already complete.
+Do not use Task.Delay duration as proof an await must suspend; do not promise thread IDs.
+
+### U9-03 — Blocking, fake async and work ownership
+Unit/topics: 9 I/O versus CPU, Task.Run, .Result/.Wait(), async void, forgotten awaits.
+Type/difficulty: Code review / Application. Status: Ready.
+Source: sections 19–24, 35–36, 44–49. Files/tests: Chat only.
+Explain genuine async I/O versus thread-pool offloading, blocking scalability, Task
+returning methods versus async void, and what missing await changes.
+Present separately, ask for consequence and proposed correction:
+- var text = File.ReadAllTextAsync(path).Result;
+- await Task.Run(() => File.ReadAllTextAsync(path));
+- async void SaveAsync() { await store.SaveAsync(); }
+- SaveAsync(); Console.WriteLine("Saved"); (assuming Task-returning SaveAsync)
+Contrast CPU-heavy hashing in a UI with request handling; do not imply Task.Run makes
+CPU work cheaper or every blocking call inevitably deadlocks in ASP.NET Core.
+Mention ConfigureAwait only for recognition: continuation context, not a new thread
+or a universal fix for blocking. No independent mastery score from this mention.
+
+### U9-04 — Dependencies and overlapping waits
+Unit/topics: 9 sequential/concurrent operations, WhenAll, dependency boundaries.
+Type/difficulty: Design + prediction / Application. Status: Ready.
+Source: sections 14–18, 37–38, 51–52. Files/tests: Chat; prepares service.
+Explain starting operations versus awaiting them; WhenAll joins existing tasks.
+Scenario: find application, then load its company and recruiter, then build details.
+Ask one at a time: what must happen first? What can overlap? For independent two-second
+I/O waits, how do sequential/concurrent totals differ? When would overlap be unsafe?
+Explicitly include source capacity/shared dependencies and 50,000-request fan-out.
+Concurrency limits are a design discussion, not an unintroduced semaphore assignment.
+Optional experiment: learner uses Task.Delay and Stopwatch in disposable scratch code;
+provide API reminders. No timing thresholds in correctness tests.
+
+### U9-05 — Cooperative cancellation
+Unit/topics: 9 CancellationToken/Source, propagation, pre-cancellation, task state.
+Type/difficulty: Explanation + debugging / Application. Status: Ready.
+Source: sections 28–34, 49. Files/tests: Chat; prepares service.
+Explain ownership: caller owns/disposes source, callee observes token; Cancel requests
+rather than kills work. Show using var cts = new CancellationTokenSource(), cts.Token,
+cts.Cancel(), ThrowIfCancellationRequested and Task.Delay(milliseconds, token).
+Then present:
+```csharp
+static async Task LoadAsync(CancellationToken token)
+{
+    await Task.Delay(10000);
 }
 ```
+Ask why cancellation has no effect. Separately: if a downstream API ignores its token,
+does cancelling guarantee all work stops immediately? Distinguish cancelled from faulted.
+Discuss service's explicit pre-cancellation policy; accepting a token alone is insufficient.
 
-Given IEnumerable<Company> companies and var (total, matches) = companies.Inspect(c => c.Name != ""),
-ask one at a time as needed: What is T inferred as? What makes this an extension method?
-What risk does enumerating the source twice introduce, and what alternative would you choose?
-Mention tuple versus named domain type briefly, not a modelling rabbit hole.
-Use the null guards to ask why nameof(source) is preferable to a literal parameter name;
-skip if the learner already demonstrates it. No solutions to pending prediction questions.
+### U9-06 — Failures while other work is still running
+Unit/topics: 9 async exceptions/WhenAll; 7 propagation and catch boundaries.
+Type/difficulty: Explanation + prediction / Professional. Status: Ready.
+Source: sections 25–27, 51–52. Files/tests: Chat; prepares service.
+Explain await surfaces task failures; try must include the await. Distinguish a faulted
+returned task from an ordinary non-async method throwing before it returns a task.
+Service sources promise returned tasks, avoiding an unintroduced synchronous-start policy.
+Explain WhenAll waits for every supplied task to finish; one fault does not cancel siblings.
+Ask: company task faults while recruiter task remains pending. Has the combined task
+finished? Must recruiter automatically stop? Ask individually. Follow with two faults:
+where can diagnostic code inspect all failures? Teach combined Task.Exception/individual
+task state if needed; aggregate internals are recognition, not required implementation.
+No broad catches converting cancellation/storage failure into expected absence.
 
-### U8-05 — Variance through safety
+### U9-07 — Application details service
+Unit/topics: 9 task composition, dependency order, cancellation, exception propagation.
+Type/difficulty: Implementation / Professional. Status: Ready; learner implementation pending.
+Source: sections 51–52, supported by U9-02–06.
+Starter/spec: src/ExerciseWorkspace/Unit9/ApplicationDetailsService.cs.
+Tests: tests/ExerciseWorkspace.Tests/Unit9/ApplicationDetailsServiceTests.cs (10 cases).
+Command: dotnet test --filter FullyQualifiedName~ApplicationDetailsServiceTests
+Requirements live in source comments; supplied records/interfaces avoid changing learner
+Unit 7/8 types. Learner writes guards, control flow and composition. Do not reveal solution.
+Review code for blocking/detached work and failure observation; tests check observable order,
+identity, expected absence, token forwarding, overlap, completion and cancellation.
+After review ask why WhenAll does not provide a transaction or sibling cancellation.
+Natural pause; record actual support needed before continuing.
 
-Unit/topics: 8 invariance, covariance, contravariance.
-Type/difficulty: Explain + prediction / Application. Status: Complete with support; invariance misconception corrected, covariance supported, contravariance recognition only. Review queued.
-Sources: sections 18–21. Files/tests: Chat only.
-Explain producers/out and consumers/in using the source's Animal/Dog examples.
-State that these generic variance conversions concern reference types; no advanced API design.
-Then show assignments separately and ask which compile and why, assuming Dog : Animal:
+### U9-08 — Debug an async resource lifetime
+Unit/topics: 9 lifetime across awaits; 7 using/ownership/exception paths.
+Type/difficulty: Prediction + debugging / Professional. Status: Ready.
+Source: section 50 and Unit 7 ownership; requires U9-02 and U9-06.
+Starter/spec: AsyncResourceWorkflow.ReadOwnedAsync in src/ExerciseWorkspace/Unit9/AsyncResourceWorkflow.cs.
+Tests: tests/ExerciseWorkspace.Tests/Unit9/AsyncResourceWorkflowTests.cs (4 stream cases).
+Command: dotnet test --filter "FullyQualifiedName~AsyncResourceWorkflowTests&FullyQualifiedName~Stream"
+Before edits, ask when the current using scope ends relative to the pending callback task.
+Then learner fixes the starter. Explain Func<Stream> and Task<int> delegate signatures if rusty;
+no StreamReader-specific API knowledge required. Review normal/fault/cancel and synchronous
+callback throws. Use the full class filter only after U9-09 implementation.
 
+### U9-09 — Await cleanup, not just processing
+Unit/topics: 9 async lifetime; 7 IAsyncDisposable, await using, disposal versus GC.
+Type/difficulty: Explanation + implementation / Professional. Status: Ready.
+Source: section 50; Unit 7 async disposal and existing high-priority review item.
+Starter/spec: AsyncResourceWorkflow.ProcessOwnedAsync in the same source file.
+Tests: AsyncResourceWorkflowTests.cs (4 async-cleanup cases; 8 class cases total).
+Command: dotnet test --filter FullyQualifiedName~AsyncResourceWorkflowTests
+First explain IAsyncDisposable.DisposeAsync, await using and that synchronous cleanup
+may take time; async cleanup may suspend, not guarantee suspension or instant completion.
+Use a tiny unrelated instructor example, never implement the active method in chat.
+Prediction: processing finishes, cleanup is still pending. Should the owning method's
+returned task have finished? Then learner implements, preserving exception/result flow.
+Tests deliberately hold cleanup pending and cover success, fault, cancellation and
+synchronous callback throws. No custom ValueTask implementation required from learner.
+Natural pause and progress review.
+
+### U9-10 — LINQ returns tasks, and enumeration can start work
+Unit/topics: 9 async LINQ/loops; 5 deferred execution and multiple enumeration.
+Type/difficulty: Code review / Professional. Status: Ready.
+Source: sections 37–39; Unit 5 enumeration. Files/tests: Chat only.
+Explain Select(async ...) yields tasks, not completed results; execution deferred until
+query enumeration and repeating enumeration may invoke the selector again.
+Then present, assuming LoadAsync returns Task<string>:
 ```csharp
-List<Animal> a = new List<Dog>();
-IEnumerable<Animal> b = new List<Dog>();
-Action<Animal> handleAnimal = animal => Console.WriteLine(animal);
-Action<Dog> handleDog = handleAnimal;
+var tasks = ids.Select(id => LoadAsync(id, token));
+await Task.WhenAll(tasks);
+foreach (var task in tasks)
+    Console.WriteLine(await task);
 ```
+Ask whether each ID is necessarily loaded only once; learner proposes correction.
+Do not reveal fix before response. Follow with how the design changes for thousands
+of inputs or strict ordering. Revisit shallow collection snapshot versus awaiting results.
 
-For a rejected conversion, ask what unsafe operation it would otherwise permit.
-Do not demand memorisation of every variance rule.
+### U9-11 — Async streaming and ordered processing
+Unit/topics: 9 IAsyncEnumerable, await foreach, iterators, cancellation and enumerator lifetime.
+Type/difficulty: Explanation + implementation / Application/Professional. Status: Ready.
+Source: sections 40–43; U9-05/08/09 prerequisites.
+Starter/spec: src/ExerciseWorkspace/Unit9/ApplicationStreamConsumer.cs.
+Tests: tests/ExerciseWorkspace.Tests/Unit9/ApplicationStreamConsumerTests.cs (6 cases).
+Command: dotnet test --filter FullyQualifiedName~ApplicationStreamConsumerTests
+Before coding explain Task<List<T>> versus async sequence, deferred iterator execution,
+yield return and early enumeration exit. Use the source's small async numbers example;
+writing a producer is not this assignment. Explain await foreach, await in its body and
+WithCancellation(token) explicitly; no guessing the extension method name.
+Explain await foreach releases its enumerator on early exit/fault; cancellation must be
+observed by producer/callback and is not forced by an interface alone.
+One check: can processing the first item start before the final item is available?
+Then learner implements the consumer; requirements remain in source comments.
+Tests verify order, callback completion before next request, both failure origins,
+cancellation forwarding and enumerator disposal. No buffering/all-at-once concurrency.
 
-### U8-06 — Exit and stop
+### U9-12 — Transfer, review and next step
+Unit/topics: 9 integrated async reasoning; Units 7/8 interleaving as needed.
+Type/difficulty: Exit/design / Professional. Status: Ready.
+Source: sections 54–55 and observed gaps. Files/tests: Chat; existing implementation references only.
+Choose up to three short fresh questions, individually:
+- A web caller no longer wants results. Who requests cancellation, who must observe it,
+  and what happens to resources already acquired?
+- A query returns Task<List<T>>: does async imply it streams or uses another thread?
+- Two independent lookups fault: does joining them roll back effects or stop other work?
+Revisit uncertain variance/snapshot points only briefly. Review code/testing results
+versus reasoning separately; preparation/starter passes never count as learner completion.
+Record scores and review intervals from actual evidence. When adequate fluency is
+shown, recommend moving to ASP.NET Core; do not chase exhaustive language mastery.
 
-Unit/topics: 8 constraints and abstraction judgement.
-Type/difficulty: Integrated reasoning / Application. Status: Complete; explained object/casts versus constrained typing. Initial practice ended.
-Sources: sections 15, 25–27. Files/tests: Reviewed repository, no new scaffolding.
-Ask one compact transfer question: If the repository were rewritten around object,
-which compile-time guarantees would callers lose and where would casts/failures move?
-If answers plus coding review show adequate fluency, finish initial Unit 8 practice.
-Record specific unsupported/weak topics for later review; do not infer mastery from exposure.
-No extra exercises just to fill the queue. Proceed toward Unit 9 when ready.
+## Verification and continuation
 
-## Optional alternatives — only for demonstrated gaps
+One full solution test pass on 2026-11-10: both projects compile, 81 cases discovered.
+57 existing cases pass unchanged. Of 24 Unit 9 cases, two deliberate-debugging starter
+cases pass and 22 fail as expected (unimplemented methods/constructor guard and premature
+disposal). The two starter passes do not demonstrate learner performance.
+No packages, services, additional projects or learner solutions were added.
+After every meaningful coding review, record actual outcomes and hints in PROGRESS.md.
+Initial reviews: next study session, then approximately +3/+7/+21 days as appropriate.
 
-### U8-A1 — Constraint discrimination
-
-Unit/topics: 8 class/struct/new() versus interface capability.
-Type/difficulty: Debugging / Foundation. Status: Not used; reserve for later review if needed.
-Sources: sections 8–12. Files/tests: Chat only.
-Prompt: Adding where T : class does not make value.Id compile. Why not?
-Would new() guarantee Id? Ask for the capability actually needed, without adding another project.
-
-### U8-A2 — Variance safety alternative
-
-Unit/topics: 8 covariance/contravariance.
-Type/difficulty: Prediction / Foundation. Status: Not used; reserve for later review if needed.
-Sources: sections 18–21. Files/tests: Chat only.
-Prompt: A handler accepts every Animal. What promise does it already make about Dogs?
-Conversely, can a Dog-only handler safely process every Animal? Ask one direction at a time.
-
-## Coverage and evidence
-
-U8-01/02/03 cover generic types, multiple parameters, methods/inference, object versus T,
-constraints and typed interfaces. U8-04 covers generic extensions/delegates, tuples,
-deconstruction and nameof. U8-05 covers invariance and both variance directions;
-U8-03/06 assess whether abstraction is justified. This is a coverage map, not mastery evidence.
-Unit 7 record: sessions/Unit7-2026-11-10.md. Repository code and test fixtures are preserved.
-
-## Next chat
-
-Prepare Unit 9 from its source using the AGENTS.md transition workflow. Do not restart
-Unit 8 or regenerate its repository scaffolding. Retain brief variance and snapshot
-retrieval; Unit 7 async disposal fits Unit 9. See PROGRESS.md for actual results.
-
-## Preparation verification
-
-One solution build/test pass on 2026-11-10: 49 existing cases pass; eight new cases
-fail on NotImplementedException as expected. No learner code changed, no packages
-added, no solutions supplied, and no mastery inferred from preparation.
-
-## Completion verification — 2026-11-10
-
-Full solution: 57/57 tests pass with dotnet test ModernCSharp.slnx --no-restore.
-The learner's repository implementation is preserved. Snapshot work required guidance;
-variance needs fresh retrieval. TextPreview remains set aside despite passing tests.
-Completed session archived in sessions/Unit8-2026-11-10.md before Unit 9 preparation.
+Next chat: start U9-01 in teaching mode, one question at a time; do not regenerate starters.

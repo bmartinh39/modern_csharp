@@ -1,6 +1,16 @@
 # Exercise workspace
 
-Unit 8 initial practice is complete. [SESSION.md](SESSION.md) and [its session record](sessions/Unit8-2026-11-10.md) preserve the activities. The learner's [InMemoryRepository.cs](src/ExerciseWorkspace/Unit8/InMemoryRepository.cs) passes all eight requirement tests after guidance. Variance and snapshot handling remain scheduled for review. Next: prepare Unit 9 using the existing projects. [Unit 7's session record](sessions/Unit7-2026-11-10.md) is preserved separately.
+Unit 9 intensive practice is prepared in [SESSION.md](SESSION.md). Start U9-01 one question at a time; prerequisites precede each practical assignment. Teaching has not started.
+
+| Practical block | Learner source (specifications and test command in comments) | Test class |
+|---|---|---|
+| Concurrent application details and cancellation | [ApplicationDetailsService.cs](src/ExerciseWorkspace/Unit9/ApplicationDetailsService.cs) | ApplicationDetailsServiceTests (10 cases) |
+| Resource lifetime debugging and asynchronous cleanup | [AsyncResourceWorkflow.cs](src/ExerciseWorkspace/Unit9/AsyncResourceWorkflow.cs) | AsyncResourceWorkflowTests (8 cases) |
+| Ordered async-stream consumption | [ApplicationStreamConsumer.cs](src/ExerciseWorkspace/Unit9/ApplicationStreamConsumer.cs) | ApplicationStreamConsumerTests (6 cases) |
+
+These reuse the existing solution and projects; no additional packages or external services are needed. Controllable tasks and resources in the tests are supplied infrastructure. Learner implementation is pending; AsyncResourceWorkflow.ReadOwnedAsync deliberately contains a bug.
+
+Unit 8 initial practice is complete; [its session record](sessions/Unit8-2026-11-10.md) preserves the activities. The learner's [InMemoryRepository.cs](src/ExerciseWorkspace/Unit8/InMemoryRepository.cs) passes all eight requirement tests after guidance. Variance and snapshot handling remain scheduled for review. [Unit 7's session record](sessions/Unit7-2026-11-10.md) is preserved separately.
 The integrated Unit 7 exit task, [ApplicationBatchImporter.cs](src/ExerciseWorkspace/ApplicationBatchImporter.cs), is complete with guidance; its 13 tests pass as of 2026-11-10. Initial Unit 7 practice is complete with targeted reviews retained in PROGRESS.md. Earlier learner implementations are preserved.
 The [stream ownership task](RESOURCE-EXERCISE.md) is set aside after the learner requested source-material-focused practice; its reader-disposal issue remains recorded.
 The completed [salary range task](EXERCISE.md) and learner implementation are preserved.
@@ -51,8 +61,17 @@ Its success is not evidence of C# mastery or exercise completion. Exercise tests
 now present as well. The initial Unit 7 tasks and integrated batch importer have been
 implemented and individually reviewed; the latest 13 batch-import tests pass.
 Unit 8's completed repository passes its eight tests. The full solution now contains
-57 tests. These results do not remove the documented TextPreview reader-disposal issue.
+57 pre-Unit-9 tests, all still passing. These results do not remove the documented TextPreview reader-disposal issue.
 Use the filtered command in the active source file while working on each task.
+
+## Unit 9 preparation verification — 2026-11-10
+
+One full solution pass compiled both projects and discovered 81 cases: 59 pass,
+22 fail as expected. All 57 earlier cases pass; two of 24 Unit 9 cases pass on the
+deliberately flawed resource starter. The failures reflect missing implementations,
+the pending constructor guard and premature disposal. Starter passes are not learner
+completion evidence. Use each source file's filtered command during practice; the
+full solution will retain expected failures until those assignments are completed.
 
 ## Verification on 2026-11-09
 
