@@ -1,7 +1,14 @@
 ﻿# Unit 9 — Async C#: intensive practice
 
-Status: Prepared on 2026-11-10; teaching and learner assessment not started.
-Start: U9-01, one question at a time. Preparation is not assessment evidence.
+Status: Teaching in progress; U9-07 reviewed on 2026-11-12, 10/10 targeted tests pass with guidance.
+Current: U9-08 next. Session checkpoint: sessions/Unit9-2026-11-12.md.
+Consolidation: correctly predicted early exit without joining recruiter; throwing versus
+thread suspension needed correction. Briefly revisit next session, then continue U9-08.
+Working evidence: Correct workload distinction, variance direction, ownership, dependency
+order, concurrency-capacity risks, cancellation forwarding/cooperation, WhenAll waiting
+and failure-versus-absence reasoning. Task/result distinction, synchronous prefix and
+Task.Run needed explanation; completed-await and missing-await predictions correct after
+support. Revisit these through implementation; no independent coding competence claimed.
 Source: material/9 Async C# 40dea85eec9180be9557cd6855bc21cd.md.
 Previous session: sessions/Unit8-2026-11-10.md (archived); learner code preserved.
 
@@ -123,7 +130,7 @@ No broad catches converting cancellation/storage failure into expected absence.
 
 ### U9-07 — Application details service
 Unit/topics: 9 task composition, dependency order, cancellation, exception propagation.
-Type/difficulty: Implementation / Professional. Status: Ready; learner implementation pending.
+Type/difficulty: Implementation / Professional. Status: Completed with stepwise guidance; 10/10 targeted tests pass on 2026-11-12. Consolidation discussed; failure versus thread suspension needs retrieval. Cancellation API, async return semantics and typed-result retrieval needed support; no learner code edited by Codex.
 Source: sections 51–52, supported by U9-02–06.
 Starter/spec: src/ExerciseWorkspace/Unit9/ApplicationDetailsService.cs.
 Tests: tests/ExerciseWorkspace.Tests/Unit9/ApplicationDetailsServiceTests.cs (10 cases).
@@ -222,4 +229,5 @@ No packages, services, additional projects or learner solutions were added.
 After every meaningful coding review, record actual outcomes and hints in PROGRESS.md.
 Initial reviews: next study session, then approximately +3/+7/+21 days as appropriate.
 
-Next chat: start U9-01 in teaching mode, one question at a time; do not regenerate starters.
+Next chat: brief failure-versus-suspension retrieval, then U9-08 in teaching mode;
+one activity at a time. Preserve completed service and remaining starters.

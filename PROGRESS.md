@@ -2,11 +2,11 @@
 
 ## Overview
 
-- Current unit: Unit 9 — Async C# (intensive session prepared; not yet assessed).
-- Current topic: Preparation complete; next start U9-01 retrieval, one question at a time.
+- Current unit: Unit 9 — Async C# (teaching and supported implementation in progress).
+- Current topic: U9-07 service passes 10/10 tests with guidance; consolidation check pending, then U9-08 resource lifetime.
 - Record initialized: 2026-11-09.
-- Last study session: 2026-11-10 — Unit 8 compact session; repository passes 8/8 targeted tests after guidance.
-- Next recommended activity: Start SESSION.md U9-01 in teaching mode, then execution/composition/cancellation blocks before the main service. Use natural pauses after substantial coding; retain Unit 7 disposal and Unit 8 variance/snapshot reviews.
+- Last study session: 2026-11-12 — Unit 9 service composition reviewed; 10/10 targeted tests pass after stepwise guidance.
+- Next recommended activity: Resume SESSION.md U9-08 async resource-lifetime debugging, preceded by a short task-failure versus thread-suspension retrieval check. Retain Unit 7 disposal and Unit 8 variance/snapshot reviews.
 - Git checkpoint: Unit 7 code, tests, progress and workflow committed as 9154aae and pushed to origin/main on 2026-11-10. Detailed session archived in sessions/Unit7-2026-11-10.md.
 - Session preference: Ask theory questions one at a time so the learner can focus.
 - Unit 9 intensity preference (2026-11-10): More intensive than Unit 8; use deeper predictions, integrated composition, lifetime debugging and async-stream practice. Multiple study blocks are acceptable; do not dump all questions or reveal solutions.
@@ -45,7 +45,7 @@
 | 6 — Modern Modelling, Equality & Pattern Matching | Introduced; previously covered | 18/18 (100%) | — | 0/18 | — |
 | 7 — Defensive C# & Resource Management | Needs review; initial practice complete | 16/16 (100%) | 2.44/4 | 16/16 | 2026-11-10 |
 | 8 — Generics & Abstractions | Needs review; initial practice complete | 16/16 (100%) | 2.00/4 | 5/16 | 2026-11-10 |
-| 9 — Async C# | Introduced; previously covered | 27/27 (100%) | — | 0/27 | — |
+| 9 — Async C# | Practising | 27/27 (100%) | 2.00/4 | 7/27 | 2026-11-12 |
 
 ## Unit 1 — C# Fundamentals Refresher
 
@@ -251,20 +251,20 @@ Source: [9 Async C# 40dea85eec9180be9557cd6855bc21cd](material/9%20Async%20C%23%
 | Previously covered | Topic | Status | Mastery /4 | Last assessed | Next review | Evidence |
 |--------------------|-------|--------|------------|---------------|-------------|----------|
 | [x] | Asynchronous I/O and blocking versus non-blocking waiting | Introduced | — | — | — | P |
-| [x] | `Task`, `Task<T>` and completion/result semantics | Introduced | — | — | — | P |
-| [x] | `async`, return types and Async naming conventions | Introduced | — | — | — | P |
-| [x] | `await`, control flow and synchronous execution before suspension | Introduced | — | — | — | P |
+| [x] | `Task`, `Task<T>` and completion/result semantics | Practising | 2 | 2026-11-12 | Next study session | Task versus result and null task versus null result needed explanation; service correct after guidance. |
+| [x] | `async`, return types and Async naming conventions | Practising | 2 | 2026-11-12 | Next study session | Async return wrapping and forwarding explained; added async after hint. |
+| [x] | `await`, control flow and synchronous execution before suspension | Practising | 2 | 2026-11-12 | Next study session | Initial prefix prediction needed explanation; completed-await and missing-await checks correct after support. |
 | [x] | Awaiting does not inherently create a thread | Introduced | — | — | — | P |
-| [x] | Sequential operations and dependency ordering | Introduced | — | — | — | P |
-| [x] | Starting independent operations before awaiting | Introduced | — | — | — | P |
-| [x] | `Task.WhenAll`, results and concurrent completion | Introduced | — | — | — | P |
+| [x] | Sequential operations and dependency ordering | Practising | 2 | 2026-11-12 | Next study session | Correct dependency reasoning; implemented lookup and missing-result path with stepwise guidance. |
+| [x] | Starting independent operations before awaiting | Practising | 2 | 2026-11-12 | Next study session | Both child calls precede awaits; IDs/token correct following explicit guidance. |
+| [x] | `Task.WhenAll`, results and concurrent completion | Practising | 2 | 2026-11-12 | Next study session | Correct join; retrieving heterogeneous results needed example and explanation. 10/10 service tests pass. |
 | [x] | Concurrency versus CPU parallelism | Introduced | — | — | — | P |
 | [x] | CPU-bound versus I/O-bound work and appropriate `Task.Run` | Introduced | — | — | — | P |
 | [x] | Async call chains, `.Result` / `.Wait()` and blocking scalability costs | Introduced | — | — | — | P |
 | [x] | Exception propagation through await and faulted task state | Introduced | — | — | — | P |
 | [x] | Failures in `Task.WhenAll` and observing exceptions | Introduced | — | — | — | P |
 | [x] | Cooperative cancellation and `CancellationToken` | Introduced | — | — | — | P |
-| [x] | Token propagation and ThrowIfCancellationRequested | Introduced | — | — | — | P |
+| [x] | Token propagation and ThrowIfCancellationRequested | Practising | 2 | 2026-11-12 | Next study session | Correct forwarding; replaced InvalidOperationException cancellation guard after API reminder. |
 | [x] | CancellationTokenSource, requesting cancellation and disposal | Introduced | — | — | — | P |
 | [x] | Cancellation versus faults and task states | Introduced | — | — | — | P |
 | [x] | `async void` and event-handler exceptions to task-returning conventions | Introduced | — | — | — | P |
@@ -284,6 +284,7 @@ Unit 7 focused implementation and Unit 8 compact practice reviewed; retain suppo
 
 | Topic | Priority | Last assessed | Next review | Evidence / action |
 |-------|----------|---------------|-------------|-------------------|
+| Unit 9 task/result semantics and supported service composition | High | 2026-11-12 | Next study session | Fresh transfer check for async return wrapping, WhenAll results and cancellation; then approximately 2026-11-15, 2026-11-19 and 2026-12-03 as performance warrants. |
 | Unit 8 variance safety | High | 2026-11-10 | Next study session | Fresh invariant-list and consumer-direction checks; then approximately 2026-11-13, 2026-11-17 and 2026-12-01 as performance warrants. |
 | Unit 8 dictionary values, snapshots and as conversions | Medium | 2026-11-10 | Next study session | Distinguish entries from entities, shallow membership copies and conversion from transformation; implementation needed guidance. |
 | Unit 8 constraints and typed abstractions | Low | 2026-11-10 | 2026-11-13 | Fresh short transfer check, followed by approximately +7/+21-day reviews. |
@@ -419,12 +420,25 @@ No persistent conceptual weakness established. Some standard exception names nee
 - Extension syntax, tuples and deconstruction explained but not directly assessed. Other correct retrieval (type arguments, Func) and nameof use recorded as evidence without claiming broad topic mastery. Remaining topic scores stay unassessed pending fuller checks.
 - Initial practice complete. Repository passes 8/8 tests after guidance. No learner code or tests changed by Codex. Next: prepare Unit 9 and carry forward targeted review; no extra Unit 8 assignment.
 
+### 2026-11-12 — U9-07 application details service review
+
+- Learner implementation passes all 10 targeted tests; no functional findings under the supplied source contract. No learner code or tests edited by Codex.
+- Correct constructor guard, pre-cancellation, expected absence, dependency order, overlapping lookups, exact token forwarding, null child results and failure propagation. Awaits both tasks before building the result.
+- Support: cancellation exception/API reminder; async null-result versus null-task explanation; stepwise lookup/composition instructions; one typed-result await example. Completed with guidance, not independent implementation mastery.
+- Prior discussion: Task.Run/CPU versus I/O and async return wrapping required substantial explanation. Correctly reasoned about dependencies, capacity limits, ignored tokens, WhenAll waiting and failure versus absence after teaching.
+- Test run completed despite NU1900: NuGet vulnerability metadata could not be fetched. Build and targeted tests succeeded.
+- Consolidation: correctly predicted removing WhenAll allows the method to fail before recruiter completion. Initially described throwing as suspending the thread; clarified method exit/faulted task versus thread suspension. Verify this distinction next session.
+- Correctly questioned result retrieval after successful WhenAll: .Result cannot block at that point; await remains the exercise convention and retrieves already-completed results. No learner changes required.
+- Session checkpoint: sessions/Unit9-2026-11-12.md. Next: U9-08; async disposal/streams remain pending.
+
 ## Next Session
 
+- Current checkpoint: U9-07 complete with guidance on 2026-11-12; 10/10 targeted tests pass. Resume U9-08 after brief failure-versus-suspension retrieval. Preparation notes below describe the original baseline, not current learner results.
+
 - Unit 9 preparation completed on 2026-11-10 using the Unit 9 source and existing projects. SESSION.md contains 12 varied activities, with three practical blocks (service composition, resource lifetime including async cleanup, and stream consumption). No solutions supplied.
-- Start U9-01, one question at a time. Teach prerequisite APIs before assignment; do not regenerate the starters. Natural pauses after U9-07 and U9-09.
+- U9-01–07 have been discussed/completed with support. Continue at U9-08, one activity at a time. Teach prerequisite APIs before assignment; do not regenerate the starters. Natural pause after U9-09.
 - Starters: src/ExerciseWorkspace/Unit9/ApplicationDetailsService.cs, AsyncResourceWorkflow.cs, ApplicationStreamConsumer.cs. Concise specifications and filtered commands are in source comments; tests are in tests/ExerciseWorkspace.Tests/Unit9/.
 - One full solution verification pass: both projects compile; 81 cases discovered, 59 pass and 22 fail. All 57 prior cases pass. Of 24 Unit 9 cases, two deliberate-debugging starter cases already pass; all other failures are expected starter failures, not infrastructure failures. No learner assessment or mastery increase from preparation.
 - No packages, projects, external services or changes to learner implementations. TaskCompletionSource/WaitAsync probes are supplied test infrastructure, not independent learning requirements.
 - Retain brief variance/snapshot retrieval and Unit 7 async-disposal review. Unit 8's completed record is sessions/Unit8-2026-11-10.md; TextPreview remains set aside.
-- Unit 8 checkpoint 1261f23 was pushed before preparation. Unit 9 teaching has not started; record actual support and performance after coding reviews/session end.
+- Unit 8 checkpoint 1261f23 was pushed before preparation. Unit 9 teaching is now in progress; see U9-07 review above.

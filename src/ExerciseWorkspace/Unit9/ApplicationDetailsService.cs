@@ -35,12 +35,29 @@ public sealed class ApplicationDetailsService
 
     public ApplicationDetailsService(IApplicationDetailsSource source)
     {
+        ArgumentNullException.ThrowIfNull(source);
+
         _source = source;
     }
 
-    public Task<ApplicationDetails?> GetApplicationDetailsAsync(
+    public async Task<ApplicationDetails?> GetApplicationDetailsAsync(
         Guid applicationId, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        cancellationToken.ThrowIfCancellationRequested();
+
+        ApplicationEntry? applicationEntry = await _source.FindApplicationAsync(applicationId, cancellationToken);
+
+        if (applicationEntry == null)
+            return null;
+
+        Task<CompanyInfo?> companyInfoTask = _source.LoadCompanyAsync(applicationEntry.CompanyId, cancellationToken);
+        Task<RecruiterInfo?> recruiterInfoTask = _source.LoadRecruiterAsync(applicationEntry.Id, cancellationToken);
+
+        await Task.WhenAll(companyInfoTask, recruiterInfoTask);
+
+        CompanyInfo? companyInfo = await companyInfoTask;
+        RecruiterInfo? recruiterInfo = await recruiterInfoTask;
+
+        return new ApplicationDetails(applicationEntry, companyInfo, recruiterInfo);
     }
 }
